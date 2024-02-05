@@ -22,6 +22,9 @@ class VehicleModel(models.Model):
     def get_api_url(self):
         return reverse("api_vehicle_model", kwargs={"pk": self.id})
 
+    class Meta:
+        ordering = ["name"]
+
 
 class Automobile(models.Model):
     color = models.CharField(max_length=50)
@@ -37,3 +40,6 @@ class Automobile(models.Model):
 
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
+
+    class Meta:
+        ordering = ["vin"]
