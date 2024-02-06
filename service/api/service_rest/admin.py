@@ -7,7 +7,6 @@ from .models import AutomobileVO, Technician, Appointment
 class AutomobileVOAdmin(admin.ModelAdmin):
     list_display = ('id', 'import_href', 'vin', 'sold')
 
-
 @admin.register(Technician)
 class TechnicianAdmin(admin.ModelAdmin):
     pass

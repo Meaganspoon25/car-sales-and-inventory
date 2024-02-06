@@ -31,14 +31,10 @@ class Appointment(models.Model):
     reason = models.CharField(max_length=200)
     status = models.CharField(max_length=200, default='created')
     customer = models.CharField(max_length=200)
-    vin = models.ForeignKey(
-        AutomobileVO,
-        related_name="vins",
-        on_delete=models.CASCADE,
-    )
+    vin = models.CharField(max_length=200)
     technician = models.ForeignKey(
         Technician,
-        related_name="technicians",
+        related_name="appointments",
         on_delete=models.SET_NULL,
         null=True
     )
