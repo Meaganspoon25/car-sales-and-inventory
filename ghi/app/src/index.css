@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#myCenter .navbar-nav {
+  flex-direction: row; /* Ensure nav items are inlined */
+  justify-content: center;
+  width: 100%;
+}
+
+#myCenter .navbar-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
