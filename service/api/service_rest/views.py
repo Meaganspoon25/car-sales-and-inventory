@@ -3,12 +3,26 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
-from .models import Technician
+from .models import Technician, AutomobileVO
 
 # Create your views here.
-class TechnicianEncoder(ModelEncoder):
+class LocationVODetailEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = ["name", "vin", "import_href",]
+
+class TechnicianListEncoder(ModelEncoder):
     model = Technician
     properties = [
+        "id",
+        "first_name",
+        "last_name",
+        "employee_id",
+    ]
+
+class TechnicianDetailEncoder(ModelEncoder):
+    model = Technician
+    properties = [
+        "id",
         "first_name",
         "last_name",
         "employee_id",
@@ -24,15 +38,14 @@ def api_list_technicians(request):
         technicians = Technician.objects.all()
         return JsonResponse(
             {"technicians": technicians},
-            encoder=TechnicianEncoder,
+            encoder=TechnicianListEncoder,
         )
     else:
-        print(request.body)
         content = json.loads(request.body)
         technician = Technician.objects.create(**content)
         return JsonResponse(
             technician,
-            encoder=TechnicianEncoder,
+            encoder=TechnicianListEncoder,
             safe=False,
         )
 
@@ -43,13 +56,46 @@ def api_show_technician(request, pk):
             technician = Technician.objects.get(pk=pk)
             return JsonResponse(
                 technician,
-                encoder=TechnicianEncoder,
+                encoder=TechnicianListEncoder,
                 safe=False
             )
         except Technician.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
+    elif request.method == "DELETE":
+        try:
+            technician = Technician.objects.get(pk=pk)
+            technician.delete()
+            return JsonResponse(
+                technician,
+                encoder=TechnicianDetailEncoder,
+                safe=False,
+            )
+        except Technician.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    else:
+        try:
+            content = json.loads(request.body)
+            technician = Technician.objects.get(pk=pk)
+
+            props = ["first_name", "last_name", "employee_id"]
+            for prop in props:
+                if prop in content:
+                    setattr(technician, prop, content[prop])
+            technician.save()
+            return JsonResponse(
+                technician,
+                encoder=TechnicianDetailEncoder,
+                safe=False,
+            )
+        except Technician.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+
 
 # @require_http_methods(["GET", "POST"])
 # def api_list_appointments(request, location_vo_id=None):

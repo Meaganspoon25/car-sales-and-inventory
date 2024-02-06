@@ -15,7 +15,6 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path
-# from .views import api_list_services, api_show_service, api_list_technicians
 from .views import api_list_technicians, api_show_technician
 
 urlpatterns = [
