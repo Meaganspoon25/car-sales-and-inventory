@@ -2,8 +2,10 @@
 
 Team:
 
-* Damien Camel - Service Microservice
+* Person 1 - Which microservice?
+Meagan Weatherspoon-Sales
 * Person 2 - Which microservice?
+Damien Camel - Service
 
 ## Design
 
