@@ -19,8 +19,8 @@ import AutomobilesForm from './AutomobilesForm';
 // import SalesList from './SalesList';
 // import SalesForm from './SalesForm';
 
-// import TechnicianList from './TechnicianList';
-// import TechnicianForm from './TechnicianForm';
+import TechniciansList from './TechniciansList';
+import TechniciansForm from './TechnicianForm';
 
 // import AppointmentList from './AppointmentList';
 // import AppointmentForm from './AppointmentForm';
@@ -43,17 +43,17 @@ function App() {
           <Route path="/automobiles" element={<AutomobilesList />} />
           <Route path="/automobiles/new" element={<AutomobilesForm />} />
 
-          {/* <Route path="/salespeople" element={<SalespeopleList />} />
-          <Route path="/salesperson/new" element={<SalespersonForm />} /> */}
+          <Route path="/salespeople" element={<SalespeopleList />} />
+          <Route path="/salespeople/new" element={<SalespersonForm />} />
 
-          {/* <Route path="/customers" element={<CustomersList />} />
-          <Route path="/customers/new" element={<CustomersForm />} /> */}
+          <Route path="/customers" element={<CustomersList />} />
+          <Route path="/customers/new" element={<CustomersForm />} />
 
           {/* <Route path="/sales" element={<SalesList />} />
           <Route path="/sales/new" element={<SalesForm />} /> */}
 
-          {/* <Route path="/technicians" element={<TechnicianList />} />
-          <Route path="/technicians/new" element={<TechnicianForm />} /> */}
+          <Route path="/technicians" element={<TechniciansList />} />
+          <Route path="/technicians/new" element={<TechniciansForm />} />
 
           {/* <Route path="/appointments" element={<AppointmentList />} />
           <Route path="/appointments/new" element={<AppointmentForm />} /> */}
