@@ -19,8 +19,6 @@ import AutomobilesForm from './AutomobilesForm';
 // import SalesList from './SalesList';
 // import SalesForm from './SalesForm';
 
-import TechniciansList from './TechniciansList';
-import TechniciansForm from './TechnicianForm';
 import TechnicianList from './TechnicianList';
 import TechnicianForm from './TechnicianForm';
 
