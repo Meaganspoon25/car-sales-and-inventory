@@ -14,9 +14,9 @@ django.setup()
 from sales_rest.models import AutomobileVO
 
 def get_automobile():
-    response = requests.get("http://inventory-api:8000/api/automobiles/")
+    response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles/")
     content = json.loads(response.content)
-    for automobile in content["automobiles"]:
+    for automobile in content["autos"]:
         AutomobileVO.objects.update_or_create(
             import_href=automobile["href"],
             defaults={
