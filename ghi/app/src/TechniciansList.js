@@ -5,7 +5,7 @@ function TechniciansList() {
   const [technicians, setTechnicians] = useState([]);
 
   const getData = async ()=> {
-    const response = await fetch('http://localhost:8090/api/technicians/');
+    const response = await fetch('http://localhost:8080/api/technicians/');
     if (response.ok) {
       const { technicians } = await response.json();
       setTechnicians(technicians);
@@ -42,10 +42,10 @@ function TechniciansList() {
           <tbody>
             {technicians.map(technician => {
               return (
-                <tr key={technician.href}>
+                <tr key={technician.id}>
                   <td>{ technician.employee_id }</td>
-                  <td>{ technician.name }</td>
-                  <td>{ technician.style_name }</td>
+                  <td>{ technician.first_name }</td>
+                  <td>{ technician.last_name }</td>
                   {/* <td><button onClick={() => handleDelete(hat.id)}>Delete</button></td> */}
                 </tr>
               );

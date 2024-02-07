@@ -9,7 +9,6 @@ function ManufacturersForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
-
     data.name = name;
 
     const manufacturerUrl = 'http://localhost:8100/api/manufacturers/';
@@ -20,6 +19,7 @@ function ManufacturersForm() {
         'Content-Type': 'application/json',
       },
     };
+    
     const manufacturerResponse = await fetch(manufacturerUrl, fetchOptions);
     if (manufacturerResponse.ok) {
           setName('');

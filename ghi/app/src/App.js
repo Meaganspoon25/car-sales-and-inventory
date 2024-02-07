@@ -10,17 +10,17 @@ import ModelsForm from './ModelsForm';
 import AutomobilesList from './AutomobilesList';
 import AutomobilesForm from './AutomobilesForm';
 
-// import SalespeopleList from './SalespeopleList';
-// import SalespersonForm from './SalespersonForm';
+import SalespeopleList from './SalespeopleList';
+import SalespersonForm from './SalespersonForm';
 
-// import CustomersList from './CustomersList';
-// import CustomersForm from './CustomersForm';
+import CustomersList from './CustomersList';
+import CustomersForm from './CustomersForm';
 
-// import SalesList from './SalesList';
-// import SalesForm from './SalesForm';
+import SalesList from './SalesList';
+import SalesForm from './SalesForm';
 
-import TechnicianList from './TechnicianList';
-import TechnicianForm from './TechnicianForm';
+import TechniciansList from './TechniciansList';
+import TechniciansForm from './TechniciansForm';
 
 // import AppointmentList from './AppointmentList';
 // import AppointmentForm from './AppointmentForm';
@@ -52,8 +52,8 @@ function App() {
           <Route path="/sales" element={<SalesList />} />
           <Route path="/sales/new" element={<SalesForm />} />
 
-          <Route path="/technicians" element={<TechnicianList />} />
-          <Route path="/technicians/new" element={<TechnicianForm />} />
+          <Route path="/technicians" element={<TechniciansList />} />
+          <Route path="/technicians/new" element={<TechniciansForm />} />
 
           {/* <Route path="/appointments" element={<AppointmentList />} />
           <Route path="/appointments/new" element={<AppointmentForm />} /> */}
