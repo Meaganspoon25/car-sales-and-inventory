@@ -9,17 +9,12 @@ function CustomersForm() {
   });
 
   const fetchData = async () => {
-    try {
-      const url = 'http://localhost:8090/api/customers/';
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        setFormData(data);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    const url = 'http://localhost:8090/api/customers/';
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
     }
-  };
+  }
 
   useEffect(() => {
     fetchData();
