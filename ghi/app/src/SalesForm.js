@@ -9,7 +9,6 @@ function SalesForm() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
-
   const [automobiles, setAutomobiles] = useState([]);
   const [salespersons, setSalespersons] = useState([]);
   const [customers, setCustomers] = useState([]);
@@ -36,38 +35,7 @@ function SalesForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Form submitted:', formData);
-
-    // Finding the automobile ID back to its VIN
     const selectedAutomobile = automobiles.autos.find(automobile => automobile.id.toString() === formData.automobile);
-    const adjustedFormData = {
-      ...formData,
-      // Using VIN
-      automobile: selectedAutomobile?.vin,
-    };
-
-  //   const url = 'http://localhost:8090/api/sales/'
-  //   const fetchConfig = {
-  //     method: "POST",
-  //     body: JSON.stringify(adjustedFormData),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   };
-
-  //   const response = await fetch(url, fetchConfig);
-  //   if (response.ok) {
-
-  //     setFormData({
-  //       automobile: '',
-  //       salesperson: '',
-  //       customer: '',
-  //       price: '',
-  //     });
-  //   } else {
-  //     // Error message for console
-  //     console.error('Failed to write the sale');
-  //   }
-  // };
 
   const url = 'http://localhost:8090/api/sales/';
   const fetchConfig = {
@@ -185,5 +153,4 @@ function SalesForm() {
     </div>
   );
 }
-
 export default SalesForm;

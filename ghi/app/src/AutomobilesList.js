@@ -8,7 +8,9 @@ function AutomobilesList() {
     const response = await fetch('http://localhost:8100/api/automobiles/');
     if (response.ok) {
       const data = await response.json();
-      const sortedAutomobiles = data.autos.sort((a, b) => a.id - b.id);
+      // const sortedAutomobiles = data.autos.sort((a, b) => a.id - b.id);
+      // This is a string comparison function
+      const sortedAutomobiles = data.autos.sort((a, b) => a.vin.localeCompare(b.vin));
       setAutomobiles(sortedAutomobiles);
     } else {
       console.error('An error occurred fetching the automobile list data')
@@ -26,7 +28,7 @@ function AutomobilesList() {
         <table className="table table-striped m-3">
           <thead>
             <tr>
-              <th>Id</th>
+              {/* <th>Id</th> */}
               <th>VIN</th>
               <th>Color</th>
               <th>Year</th>
@@ -39,7 +41,7 @@ function AutomobilesList() {
             {automobiles.map(automobile => {
               return (
                 <tr key={automobile.href}>
-                  <td>{ automobile.id }</td>
+                  {/* <td>{ automobile.id }</td> */}
                   <td>{ automobile.vin }</td>
                   <td>{ automobile.color }</td>
                   <td>{ automobile.year }</td>
