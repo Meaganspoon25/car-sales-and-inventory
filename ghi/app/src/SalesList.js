@@ -7,7 +7,6 @@ function SalesList() {
         const response = await fetch('http://localhost:8090/api/sales/')
         if (response.ok) {
             const { sales } = await response.json();
-            console.log(sales);
             setSales(sales);
         } else {
             console.error('An Error Has Occurred!')
