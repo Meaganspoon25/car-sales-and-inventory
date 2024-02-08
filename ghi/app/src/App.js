@@ -18,6 +18,7 @@ import CustomersForm from './CustomersForm';
 
 import SalesList from './SalesList';
 import SalesForm from './SalesForm';
+import SalesHistory from './SalesHistory';
 
 import TechniciansList from './TechniciansList';
 import TechniciansForm from './TechniciansForm';

@@ -160,7 +160,7 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
                 hour12: true,
               });
               return (
-                <tr appointment={appointment.id}>
+                <tr key={appointment.id}>
                   <td>{ appointment.vin }</td>
                   <td>{ appointment.customer }</td>
                   <td>{ formattedDate }</td>
