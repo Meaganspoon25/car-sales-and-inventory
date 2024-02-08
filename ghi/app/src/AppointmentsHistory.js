@@ -85,7 +85,7 @@ function AppointmentsList() {
               });
 
               return (
-                <tr appointment={appointment.href}>
+                <tr key={appointment.href}>
                   <td>{ appointment.vin }</td>
                   <td>{ isVip }</td>
                   <td>{ appointment.customer }</td>

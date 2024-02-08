@@ -8,6 +8,8 @@ function CustomersForm() {
     phone_number: '',
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const fetchData = async () => {
     const url = 'http://localhost:8090/api/customers/';
     const response = await fetch(url);
@@ -41,6 +43,7 @@ function CustomersForm() {
         address: '',
         phone_number: '',
       });
+      setIsSubmitted(true);
     }
   };
 
@@ -54,12 +57,15 @@ function CustomersForm() {
     });
   };
 
+  let messageClasses = isSubmitted ? 'alert alert-success mb-0' : 'd-none';
+  let formClasses = isSubmitted ? 'd-none' : '';
+
   return (
     <div className="my-5 container">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Add a Customer</h1>
-          <form onSubmit={handleSubmit} id="create-customers-form">
+          <form className={formClasses} onSubmit={handleSubmit} id="create-customers-form">
             <div className="form-floating mb-3">
               <input
                 onChange={handleFormChange}
@@ -114,6 +120,9 @@ function CustomersForm() {
             </div>
             <button className="btn btn-primary">Create</button>
           </form>
+          <div className={messageClasses} id="success-message">
+                    Congratulations! Your customer has been registered!
+          </div>
         </div>
       </div>
     </div>

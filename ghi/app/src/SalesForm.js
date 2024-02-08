@@ -8,6 +8,8 @@ function SalesForm() {
     price: '',
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const [automobiles, setAutomobiles] = useState([]);
   const [salespersons, setSalespersons] = useState([]);
   const [customers, setCustomers] = useState([]);
@@ -85,8 +87,7 @@ function SalesForm() {
         customer: '',
         price: '',
       });
-    } else {
-      console.error('Submission failed', await response.text());
+      setIsSubmitted(true);
     }
   } catch (error) {
     console.error('Failed to submit the form', error);
@@ -98,12 +99,15 @@ function SalesForm() {
     setFormData({ ...formData, [name]: value });
   };
 
+  let messageClasses = isSubmitted ? 'alert alert-success mb-0' : 'd-none';
+  let formClasses = isSubmitted ? 'd-none' : '';
+
   return (
     <div className="my-5 container">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h2>Record a new sale</h2>
-          <form onSubmit={handleSubmit}>
+          <form className={formClasses} onSubmit={handleSubmit}>
             <div className="form-floating mb-3">
               <select
                 id="automobile"
@@ -173,6 +177,9 @@ function SalesForm() {
             </div>
             <button type="submit" className="btn btn-primary">Create</button>
           </form>
+          <div className={messageClasses} id="success-message">
+                    Congratulations! Your sale has been recorded!
+          </div>
         </div>
       </div>
     </div>
