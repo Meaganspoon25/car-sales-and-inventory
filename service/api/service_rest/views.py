@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
+# import pika
 from common.json import ModelEncoder
 from .models import Technician, AutomobileVO, Appointment
 
@@ -171,7 +172,7 @@ def api_list_appointments(request):
             safe=False,
         )
 
-@require_http_methods(["DELETE", "GET"])
+@require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_appointment(request, pk):
     if request.method == "GET":
         appointment = Appointment.objects.get(id=pk)
@@ -179,23 +180,60 @@ def api_show_appointment(request, pk):
             {"appointments": appointment},
             encoder=AppointmentDetailEncoder,
         )
-    else:
+    elif request.method == "DELETE":
         count, _ = Appointment.objects.filter(pk=pk).delete()
         return JsonResponse({"deleted": count > 0})
+    else:
+        try:
+            content = json.loads(request.body)
+            appointment = Appointment.objects.get(pk=pk)
+
+            # Assuming you only want to update the status field from PUT request
+            if 'status' in content and content['status'] in ['cancelled', 'finished']:
+                appointment.status = content['status']
+                appointment.save()
+                return JsonResponse(
+                    appointment,
+                    encoder=AppointmentDetailEncoder,
+                    safe=False,
+                )
+            else:
+                # If the status is not one of the expected values, return an error response
+                return JsonResponse({"message": "Invalid status. Only 'cancelled' or 'finished' are acceptable."}, status=400)
+
+        except Appointment.DoesNotExist:
+            return JsonResponse({"message": "Appointment not found"}, status=404)
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid request body"}, status=400)
+
+
+
+# def send_message(queue_name, body):
+#     parameters = pika.ConnectionParameters(host="rabbitmq")
+#     connection = pika.BlockingConnection(parameters)
+#     channel = connection.channel()
+#     channel.queue_declare(queue=queue_name)
+#     channel.basic_publish(
+#         exchange="",
+#         routing_key=queue_name,
+#         body=json.dumps(body),
+#     )
+#     connection.close()
 
 # @require_http_methods(["PUT"])
-# def api_approve_presentation(request, pk):
-#     presentation = Presentation.objects.get(id=pk)
-#     presentation.approve()
+# def api_finish_appointment(request, pk):
+#     appointment = Appointment.objects.get(id=pk)
+#     appointment.finish()
 #     body = {
-#         "presenter_name": presentation.presenter_name,
-#         "presenter_email": presentation.presenter_email,
-#         "title": presentation.title,
+#         # "presenter_name": appointment.presenter_name,
+#         # "presenter_email": appointment.presenter_email,
+#         # "title": appointment.title,
+#         "status": appointment.status,
 #     }
-#     send_message("presentation_approvals", body)
+#     send_message("appointment_finishes", body)
 #     return JsonResponse(
-#         presentation,
-#         encoder=PresentationDetailEncoder,
+#         appointment,
+#         encoder=AppointmentDetailEncoder,
 #         safe=False,
 #     )
 

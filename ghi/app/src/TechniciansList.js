@@ -19,7 +19,7 @@ function TechniciansList() {
   }, []);
 
 //   const handleDelete = (TechnicianId) => {
-//     fetch(`/api/technicians/${technicianId}/`, { method: 'DELETE' })
+//     fetch(`http://localhost:8080/api/technicians/${technicianId}/`, { method: 'DELETE' })
 //       .then(() => {
 //         setTechnicians(technicians.filter(technician => technician.id !== technicianId));
 //       })

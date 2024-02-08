@@ -39,7 +39,15 @@ function ModelsList() {
                   <td>{ model.id }</td>
                   <td>{ model.name }</td>
                   <td>{ model.manufacturer.name }</td>
-                  <td>{ model.picture_url }</td>
+                  {/* <td>{ model.picture_url }</td> */}
+                  <td>
+                    {/* <img src={ model.picture_url } alt="" className="img-thumbnail" style={{height:"150px", width:"250px"}}/> */}
+                    {model.picture_url ? (
+                      <img src={model.picture_url} alt={model.name} className="img-thumbnail" style={{height: "150px", width: "250px"}}/>
+                    ) : (
+                      <span style={{color: 'red'}}>(No URL provided)</span>
+                    )}
+                  </td>
                 </tr>
               );
             })}

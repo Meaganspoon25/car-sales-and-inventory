@@ -40,7 +40,7 @@ def poll():
         except Exception as e:
             print(e, file=sys.stderr)
             print("some kind of an error")
-        time.sleep(10)
+        time.sleep(60)
 
 
 if __name__ == "__main__":

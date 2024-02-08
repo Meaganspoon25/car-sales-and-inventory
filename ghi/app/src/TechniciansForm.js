@@ -85,7 +85,7 @@ function TechnicianForm() {
                     </div>
                 </div>
                 </div>
-                <button className="btn btn-lg btn-primary">Create that technician!</button>
+                <button className="btn btn-lg btn-primary">Create technician</button>
             </form>
             <div className={messageClasses} id="success-message">
                 Congratulations! Your technician has been registered!
