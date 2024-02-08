@@ -2,11 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
-# import pika
 from common.json import ModelEncoder
 from .models import Technician, AutomobileVO, Appointment
-
-# Create your views here.
 
 class AutomobileVOListEncoder(ModelEncoder):
     model = AutomobileVO
@@ -52,7 +49,6 @@ class AppointmentListEncoder(ModelEncoder):
         "customer",
         "vin",
     ]
-
     def get_extra_data(self, o):
         return {"technician": o.technician.employee_id}
 
@@ -67,7 +63,6 @@ class AppointmentDetailEncoder(ModelEncoder):
         "vin",
         "technician",
     ]
-
     encoders = {
         "technician": TechnicianDetailEncoder(),
     }
@@ -145,7 +140,6 @@ def api_show_technician(request, pk):
             response.status_code = 404
             return response
 
-
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request):
     if request.method == "GET":
@@ -198,57 +192,7 @@ def api_show_appointment(request, pk):
                 )
             else:
                 return JsonResponse({"message": "Invalid status. Only 'cancelled' or 'finished' are acceptable."}, status=400)
-
         except Appointment.DoesNotExist:
             return JsonResponse({"message": "Appointment not found"}, status=404)
         except json.JSONDecodeError:
             return JsonResponse({"message": "Invalid request body"}, status=400)
-
-
-# wtf is pika
-
-# def send_message(queue_name, body):
-#     parameters = pika.ConnectionParameters(host="rabbitmq")
-#     connection = pika.BlockingConnection(parameters)
-#     channel = connection.channel()
-#     channel.queue_declare(queue=queue_name)
-#     channel.basic_publish(
-#         exchange="",
-#         routing_key=queue_name,
-#         body=json.dumps(body),
-#     )
-#     connection.close()
-
-# @require_http_methods(["PUT"])
-# def api_finish_appointment(request, pk):
-#     appointment = Appointment.objects.get(id=pk)
-#     appointment.finish()
-#     body = {
-#         # "presenter_name": appointment.presenter_name,
-#         # "presenter_email": appointment.presenter_email,
-#         # "title": appointment.title,
-#         "status": appointment.status,
-#     }
-#     send_message("appointment_finishes", body)
-#     return JsonResponse(
-#         appointment,
-#         encoder=AppointmentDetailEncoder,
-#         safe=False,
-#     )
-
-
-# @require_http_methods(["PUT"])
-# def api_reject_presentation(request, pk):
-#     presentation = Presentation.objects.get(id=pk)
-#     presentation.reject()
-#     body = {
-#         "presenter_name": presentation.presenter_name,
-#         "presenter_email": presentation.presenter_email,
-#         "title": presentation.title,
-#     }
-#     send_message("presentation_rejections", body)
-#     return JsonResponse(
-#         presentation,
-#         encoder=PresentationDetailEncoder,
-#         safe=False,
-#     )

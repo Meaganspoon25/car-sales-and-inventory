@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import AutomobileVO, Salesperson, Customer, Sale
 
+
 @admin.register(AutomobileVO)
 class AutomobileVO(admin.ModelAdmin):
     pass

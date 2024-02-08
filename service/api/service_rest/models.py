@@ -1,15 +1,12 @@
 from django.db import models
 from django.urls import reverse
 
-# Create your models here.
 class AutomobileVO(models.Model):
-    # An AutomobileVO model containing vin and sold fields.
     import_href = models.CharField(max_length=200, unique=True)
     vin = models.CharField(max_length=200)
     sold = models.BooleanField(default=False)
 
 class Technician(models.Model):
-    # A Technician model containing first_name, last_name, and employee_id fields.
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     employee_id = models.CharField(max_length=200)
@@ -24,9 +21,6 @@ class Technician(models.Model):
         ordering = ["employee_id"]
 
 class Appointment(models.Model):
-    # An Appointment model containing date_time, reason, status, vin, customer and technician fields.
-    # The technician field should be a foreign key.
-    # Your vin field should be of type CharField. (It should not be a AutomobileVO foreign key.)
     date_time = models.DateTimeField()
     reason = models.CharField(max_length=200)
     status = models.CharField(max_length=200, default='created')

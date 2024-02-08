@@ -22,7 +22,6 @@ function AppointmentsList() {
   }, []);
 
   const fetchVipVins = async () => {
-    // const response = await fetch('http://localhost:8100/api/automobiles/');
     const response = await fetch('http://localhost:8100/api/automobiles/');
     if (response.ok) {
       const data = await response.json();
@@ -36,10 +35,10 @@ function AppointmentsList() {
   function handleFilterVinChange(e) {
     setFilterVinValue(e.target.value);
   }
+
   const filteredAppointments = appointments.filter((appointment) =>
   appointment.vin.toLowerCase().includes(filterVinValue.toLowerCase())
   );
-
 
   return (
     <div className="my-5 container">
@@ -69,21 +68,13 @@ function AppointmentsList() {
             {filteredAppointments.map(appointment => {
               const isVip = vipVins.has(appointment.vin) ? "Yes ⭐" : "No";
               const date = new Date(appointment.date_time);
-
-              // const formattedDate = date.toLocaleDateString('en-US', {
-              //   year: 'numeric',
-              //   month: '2-digit',
-              //   day: '2-digit',
-              // });
               const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-
               const formattedTime = date.toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
                 hour12: true,
               });
-
               return (
                 <tr key={appointment.href}>
                   <td>{ appointment.vin }</td>

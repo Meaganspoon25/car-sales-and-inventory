@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 function SalesForm() {
   const [formData, setFormData] = useState({
     automobile: '',
@@ -24,7 +25,6 @@ function SalesForm() {
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setter(data);
       }
     } catch (error) {
@@ -34,8 +34,6 @@ function SalesForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted:', formData);
-    const selectedAutomobile = automobiles.autos.find(automobile => automobile.id.toString() === formData.automobile);
 
   const url = 'http://localhost:8090/api/sales/';
   const fetchConfig = {
@@ -57,10 +55,10 @@ function SalesForm() {
       });
       setIsSubmitted(true);
     }
-  } catch (error) {
-    console.error('Failed to submit the form', error);
-  }
-};
+    } catch (error) {
+      console.error('Failed to submit the form', error);
+    }
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -146,11 +144,12 @@ function SalesForm() {
             <button type="submit" className="btn btn-primary">Create</button>
           </form>
           <div className={messageClasses} id="success-message">
-                    Congratulations! Your sale has been recorded!
+            Congratulations! Your sale has been recorded!
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 export default SalesForm;

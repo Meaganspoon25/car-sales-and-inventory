@@ -10,7 +10,6 @@ function AppointmentsList() {
     const response = await fetch('http://localhost:8080/api/appointments/?status=created');
     if (response.ok) {
       const { appointments } = await response.json();
-      // setAppointments(appointments);
       setAppointments(appointments.filter(appointment => appointment.status === 'created'));
     } else {
       console.error('An error occurred fetching the data')
@@ -33,14 +32,9 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
   try {
     const response = await fetch(url, fetchOptions);
     if (response.ok) {
-      console.log('Appointment status updated successfully');
-      // Refresh the appointment list to reflect the status update
-      getData(); // Call getData again to refresh the list
-      // Refreshing the list of appointments
-      // Confirmation message
+      getData();
       setConfirmationMessage(`Congratulations! The appointment is ${newStatus}.`);
       setShowConfirmation(true);
-      // the timeout for the confirmation, pretty cool tbh
       setTimeout(() => setShowConfirmation(false), 10000);
     } else {
       console.error('Failed to update appointment status', response.statusText);
@@ -92,14 +86,7 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
           {appointments.map(appointment => {
               const isVip = vipVins.has(appointment.vin) ? "Yes ⭐" : "No";
               const date = new Date(appointment.date_time);
-
-              // const formattedDate = date.toLocaleDateString('en-US', {
-              //   year: 'numeric',
-              //   month: '2-digit',
-              //   day: '2-digit',
-              // });
               const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-
               const formattedTime = date.toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -115,8 +102,6 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
                   <td>{ appointment.technician}</td>
                   <td>{ appointment.reason }</td>
                   <td>
-                    {/* <button onClick={() => handleCancel(appointment.id)}>Cancel</button>
-                    <button onClick={() => handleFinish(appointment.id)}>Finish</button> */}
                     <button onClick={() => updateAppointmentStatus(appointment.id, 'cancelled')}>Cancel</button>
                     <button onClick={() => updateAppointmentStatus(appointment.id, 'finished')}>Finish</button>
                   </td>

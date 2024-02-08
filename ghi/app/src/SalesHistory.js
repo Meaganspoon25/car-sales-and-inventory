@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+
 export default function SalespersonsHistory() {
+
   const [salespersons, setSalespersons] = useState([]);
   const [selectedSalesperson, setSelectedSalesperson] = useState("");
   const [filteredSales, setFilteredSales] = useState([]);
