@@ -23,10 +23,10 @@ function AppointmentsList() {
 
   const fetchVipVins = async () => {
     // const response = await fetch('http://localhost:8100/api/automobiles/');
-    const response = await fetch('http://localhost:8100/api/automobiles/'); // Adjust the port and endpoint as necessary
+    const response = await fetch('http://localhost:8100/api/automobiles/');
     if (response.ok) {
       const data = await response.json();
-      const vins = new Set(data.autos.map(auto => auto.vin)); // Assuming the structure is similar to what you've provided
+      const vins = new Set(data.autos.map(auto => auto.vin));
       setVipVins(vins);
     } else {
       console.error('An error occurred fetching the VIP VINs');
@@ -36,13 +36,8 @@ function AppointmentsList() {
   function handleFilterVinChange(e) {
     setFilterVinValue(e.target.value);
   }
-
-  const filteredVin = appointments.filter((appointment) =>
-  appointment.vin.includes(filterVinValue)
-  );
-
   const filteredAppointments = appointments.filter((appointment) =>
-  appointment.vin.includes(filterVinValue)
+  appointment.vin.toLowerCase().includes(filterVinValue.toLowerCase())
   );
 
 

@@ -10,14 +10,14 @@ import ModelsForm from './ModelsForm';
 import AutomobilesList from './AutomobilesList';
 import AutomobilesForm from './AutomobilesForm';
 
-import SalespeopleList from './SalespeopleList';
-import SalespersonForm from './SalespersonForm';
+// import SalespeopleList from './SalespeopleList';
+// import SalespersonForm from './SalespersonForm';
 
-import CustomersList from './CustomersList';
-import CustomersForm from './CustomersForm';
+// import CustomersList from './CustomersList';
+// import CustomersForm from './CustomersForm';
 
-import SalesList from './SalesList';
-import SalesForm from './SalesForm';
+// import SalesList from './SalesList';
+// import SalesForm from './SalesForm';
 
 import TechniciansList from './TechniciansList';
 import TechniciansForm from './TechniciansForm';
@@ -45,15 +45,15 @@ function App() {
           <Route path="/automobiles" element={<AutomobilesList />} />
           <Route path="/automobiles/new" element={<AutomobilesForm />} />
 
-          <Route path="/salespeople" element={<SalespeopleList />} />
-          <Route path="/salespeople/new" element={<SalespersonForm />} />
+          {/* <Route path="/salespeople" element={<SalespeopleList />} />
+          <Route path="/salespeople/new" element={<SalespersonForm />} /> */}
 
-          <Route path="/customers" element={<CustomersList />} />
-          <Route path="/customers/new" element={<CustomersForm />} />
+          {/* <Route path="/customers" element={<CustomersList />} />
+          <Route path="/customers/new" element={<CustomersForm />} /> */}
 
-          <Route path="/sales" element={<SalesList />} />
+          {/* <Route path="/sales" element={<SalesList />} />
           <Route path="/sales/new" element={<SalesForm />} />
-          <Route path="/sales/history" element={<SalesHistory />} />
+          <Route path="/sales/history" element={<SalesHistory />} /> */}
 
           <Route path="/technicians" element={<TechniciansList />} />
           <Route path="/technicians/new" element={<TechniciansForm />} />

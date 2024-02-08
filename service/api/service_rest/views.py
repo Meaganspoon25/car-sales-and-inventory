@@ -188,7 +188,6 @@ def api_show_appointment(request, pk):
             content = json.loads(request.body)
             appointment = Appointment.objects.get(pk=pk)
 
-            # Assuming you only want to update the status field from PUT request
             if 'status' in content and content['status'] in ['cancelled', 'finished']:
                 appointment.status = content['status']
                 appointment.save()
@@ -198,7 +197,6 @@ def api_show_appointment(request, pk):
                     safe=False,
                 )
             else:
-                # If the status is not one of the expected values, return an error response
                 return JsonResponse({"message": "Invalid status. Only 'cancelled' or 'finished' are acceptable."}, status=400)
 
         except Appointment.DoesNotExist:
@@ -207,6 +205,7 @@ def api_show_appointment(request, pk):
             return JsonResponse({"message": "Invalid request body"}, status=400)
 
 
+# wtf is pika
 
 # def send_message(queue_name, body):
 #     parameters = pika.ConnectionParameters(host="rabbitmq")

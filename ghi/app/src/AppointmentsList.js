@@ -21,21 +21,9 @@ function AppointmentsList() {
     getData()
   }, []);
 
-  // Previous delete code
-  // const handleCancel = (appointmentId) => {
-  //   fetch(`http://localhost:8080/api/appointments/${appointmentId}/`, { method: 'POST' })
-  //     .then(() => {
-  //       setAppointments(appointments.filter(appointment => appointment.id !== appointmentId));
-  //     })
-  //     .catch(error => console.error('Error cancelling hat:', error));
-  // };
-
-
-// PUT Attempt
-// PUT Attempt
 const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
   const url = `http://localhost:8080/api/appointments/${appointmentId}/`;
-  const data = { status: newStatus, vin: vin }; // Assuming `vin` is in your component state and is the VIN you want to send
+  const data = { status: newStatus, vin: vin };
   const fetchOptions = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -48,13 +36,12 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
       console.log('Appointment status updated successfully');
       // Refresh the appointment list to reflect the status update
       getData(); // Call getData again to refresh the list
-      // Additional logic here to handle successful status update, such as refreshing the list of appointments
-      // Here, you set the confirmation message and make it visible
+      // Refreshing the list of appointments
+      // Confirmation message
       setConfirmationMessage(`Congratulations! The appointment is ${newStatus}.`);
       setShowConfirmation(true);
-      setTimeout(() => setShowConfirmation(false), 10000); // Optional: hide after 3 seconds
-
-      // Refresh
+      // the timeout for the confirmation, pretty cool tbh
+      setTimeout(() => setShowConfirmation(false), 10000);
     } else {
       console.error('Failed to update appointment status', response.statusText);
     }
@@ -62,54 +49,14 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
     console.error('Error updating appointment status', error);
   }
 };
-// PUT Attempt
-// PUT Attempt
-
-
-  // const handleCancel = (appointmentId) => {
-  //   const requestOptions = {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ status: 'cancelled' }) // Assuming 'cancelled' is a valid status
-  //   };
-
-  //   fetch(`http://localhost:8080/api/appointments/${appointmentId}/`, requestOptions)
-  //     .then(response => response.json())
-  //     .then(() => {
-  //       // Update the status in the local state without removing the appointment
-  //       // setAppointments(appointments.map(appointment =>
-  //       setAppointments(currentAppointments => currentAppointments.map(appointment =>
-  //         appointment.id === appointmentId ? { ...appointment, status: 'cancelled' } : appointment
-  //       ));
-  //     })
-  //     .catch(error => console.error('Error cancelling appointment:', error));
-  // };
-
-  // const handleFinish = (appointmentId) => {
-  //   const requestOptions = {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ status: 'completed' }) // Assuming 'completed' is a valid status
-  //   };
-
-  //   fetch(`http://localhost:8080/api/appointments/${appointmentId}/`, requestOptions)
-  //     .then(response => response.json())
-  //     .then(() => {
-  //       // Update the status in the local state
-  //       setAppointments(appointments.map(appointment =>
-  //         appointment.id === appointmentId ? { ...appointment, status: 'completed' } : appointment
-  //       ));
-  //     })
-  //     .catch(error => console.error('Error finishing appointment:', error));
-  // };
 
   const [vipVins, setVipVins] = useState(new Set());
 
   const fetchVipVins = async () => {
-    const response = await fetch('http://localhost:8100/api/automobiles/'); // Adjust the port and endpoint as necessary
+    const response = await fetch('http://localhost:8100/api/automobiles/');
     if (response.ok) {
       const data = await response.json();
-      const vins = new Set(data.autos.map(auto => auto.vin)); // Assuming the structure is similar to what you've provided
+      const vins = new Set(data.autos.map(auto => auto.vin));
       setVipVins(vins);
     } else {
       console.error('An error occurred fetching the VIP VINs');
@@ -160,7 +107,7 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
                 hour12: true,
               });
               return (
-                <tr appointment={appointment.id}>
+                <tr key={appointment.id}>
                   <td>{ appointment.vin }</td>
                   <td>{ appointment.customer }</td>
                   <td>{ formattedDate }</td>

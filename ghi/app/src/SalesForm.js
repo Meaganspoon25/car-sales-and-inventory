@@ -35,30 +35,63 @@ function SalesForm() {
     event.preventDefault();
     console.log('Form submitted:', formData);
 
-    const url = 'http://localhost:8090/api/sales/'
-
-
-    const fetchConfig = {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    // Finding the automobile ID back to its VIN
+    const selectedAutomobile = automobiles.autos.find(automobile => automobile.id.toString() === formData.automobile);
+    const adjustedFormData = {
+      ...formData,
+      // Using VIN
+      automobile: selectedAutomobile?.vin,
     };
 
+  //   const url = 'http://localhost:8090/api/sales/'
+  //   const fetchConfig = {
+  //     method: "POST",
+  //     body: JSON.stringify(adjustedFormData),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   };
+
+  //   const response = await fetch(url, fetchConfig);
+  //   if (response.ok) {
+
+  //     setFormData({
+  //       automobile: '',
+  //       salesperson: '',
+  //       customer: '',
+  //       price: '',
+  //     });
+  //   } else {
+  //     // Error message for console
+  //     console.error('Failed to write the sale');
+  //   }
+  // };
+
+  const url = 'http://localhost:8090/api/sales/';
+  const fetchConfig = {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-
       setFormData({
         automobile: '',
         salesperson: '',
         customer: '',
         price: '',
       });
+    } else {
+      console.error('Submission failed', await response.text());
     }
+  } catch (error) {
+    console.error('Failed to submit the form', error);
   }
-
-
+};
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -82,7 +115,7 @@ function SalesForm() {
               >
                 <option value="">Choose an automobile VIN</option>
                 {automobiles?.autos?.map((automobile) => (
-                  <option key={automobile.id} value={automobile.id}>
+                  <option key={automobile.id} value={automobile.vin}>
                     {automobile.vin}
                   </option>
                 ))}

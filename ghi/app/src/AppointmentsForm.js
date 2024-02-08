@@ -141,13 +141,13 @@ function AppointmentsForm() {
                     </div>
                   </div>
 
-                {/* Date input field */}
+                {/* Date field */}
                 <div className="form-floating mb-3">
                   <input onChange={handleChangeAppointmentDate} value={appointmentDate} type="date" id="appointmentDate" name="appointmentDate" className="form-control" />
                   <label htmlFor="appointmentDate">Date</label>
                 </div>
 
-                {/* Time input field */}
+                {/* Time field */}
                 <div className="form-floating mb-3">
                   <input onChange={handleChangeAppointmentTime} value={appointmentTime} type="time" id="appointmentTime" name="appointmentTime" className="form-control" />
                   <label htmlFor="appointmentTime">Time</label>
