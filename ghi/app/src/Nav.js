@@ -28,7 +28,7 @@ function Nav() {
           <li className="nav-item">
              <NavLink className="nav-link" to="/automobiles/new">Create an Automobile</NavLink>
           </li>
-          {/* <li className="nav-item">
+          <li className="nav-item">
             <NavLink className="nav-link" to="/salespeople">Salespeople</NavLink>
               </li>
           <li className="nav-item">
@@ -36,25 +36,11 @@ function Nav() {
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/customers/">Customers</NavLink>
-          </li> */}
-
-          {/* Temp vvv */}
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/technicians">Salespeople</NavLink>
-              </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/technicians/new">Add a Salesperson</NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/technicians/">Customers</NavLink>
-          </li>
-
-          {/* Temp ^^^ */}
-
           </ul>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
-          {/* <li className="nav-item">
+          <li className="nav-item">
              <NavLink className="nav-link" to="/customers/new">Add a Customer</NavLink>
           </li>
           <li className="nav-item">
@@ -65,23 +51,7 @@ function Nav() {
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/sales/history">Salesperson History</NavLink>
-          </li> */}
-
-          {/* Temp vvvv */}
-          <li className="nav-item">
-             <NavLink className="nav-link" to="/technicians/new">Add a Customer</NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/technicians/">Sales</NavLink>
-              </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/technicians/new">Add a Sale</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/appointments/history">Salesperson History</NavLink>
-          </li>
-          {/* Temp ^^^ */}
-
           <li className="nav-item">
             <NavLink className="nav-link" to="/technicians/">Technicians</NavLink>
           </li>
