@@ -5,10 +5,10 @@ from common.json import ModelEncoder
 from django.http import JsonResponse
 import json
 
+
 class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
     properties = ["import_href", "vin", "sold", "id"]
-
 
 class SalespersonDetailEncoder(ModelEncoder):
     model = Salesperson
@@ -33,8 +33,6 @@ class SaleDetailEncoder(ModelEncoder):
         "customer": CustomerDetailEncoder(),
     }
 
-
-
 @require_http_methods(["GET", "POST"])
 def api_list_salespersons(request):
     if request.method == "GET":
@@ -52,7 +50,6 @@ def api_list_salespersons(request):
             safe=False,
         )
 
-
 @require_http_methods(["GET", "PUT", "DELETE"])
 def api_show_salesperson(request, pk):
     if request.method == "GET":
@@ -69,7 +66,6 @@ def api_show_salesperson(request, pk):
         try:
             content = json.loads(request.body)
             salesperson = Salesperson.objects.get(pk=pk)
-
             props = ["first_name", "last_name", "employee_id"]
             for prop in props:
                 if prop in content:
@@ -84,7 +80,6 @@ def api_show_salesperson(request, pk):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
-
 
 @require_http_methods(["GET", "POST"])
 def api_list_customer(request):
@@ -103,7 +98,6 @@ def api_list_customer(request):
             safe=False,
         )
 
-
 @require_http_methods(["GET", "PUT", "DELETE"])
 def api_show_customer(request, pk):
     if request.method == "GET":
@@ -120,7 +114,6 @@ def api_show_customer(request, pk):
         try:
             content = json.loads(request.body)
             customer = Customer.objects.get(pk=pk)
-
             props = ["first_name", "last_name", "address", "phone_number"]
             for prop in props:
                 if prop in content:
@@ -136,8 +129,6 @@ def api_show_customer(request, pk):
             response.status_code = 404
             return response
 
-
-
 @require_http_methods(["GET", "POST"])
 def api_list_sales(request):
     if request.method == "GET":
@@ -149,7 +140,6 @@ def api_list_sales(request):
     else:
         content = json.loads(request.body)
         try:
-
             customer = Customer.objects.get(id=content["customer"])
             content["customer"] = customer
         except Customer.DoesNotExist:
@@ -158,7 +148,6 @@ def api_list_sales(request):
                 status=400,
             )
         try:
-
             salesperson = Salesperson.objects.get(id=content["salesperson"])
             content["salesperson"] = salesperson
         except Salesperson.DoesNotExist:
@@ -167,7 +156,6 @@ def api_list_sales(request):
                 status=400,
             )
         try:
-
             automobile = AutomobileVO.objects.get(vin=content["automobile"])
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
@@ -181,8 +169,6 @@ def api_list_sales(request):
             encoder=SaleDetailEncoder,
             safe=False,
         )
-
-
 
 @require_http_methods(["GET", "PUT", "DELETE"])
 def api_show_sales(request, pk):
@@ -200,7 +186,6 @@ def api_show_sales(request, pk):
         try:
             content = json.loads(request.body)
             sale = Sale.objects.get(pk=pk)
-
             props = ["price", "automobile", "salesperson", "customer"]
             for prop in props:
                 if prop in content:

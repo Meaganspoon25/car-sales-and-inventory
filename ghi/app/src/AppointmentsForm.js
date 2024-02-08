@@ -4,11 +4,9 @@ import React, { useEffect, useState } from 'react';
 function AppointmentsForm() {
 
   const [vin, setVin] = useState('');
-//   const [date_time, setDate_Time] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState('');
   const [reason, setReason] = useState('');
-//   const [status, setStatus] = useState('');
   const [customer, setCustomer] = useState('');
   const [technician, setTechnician] = useState('');
   const [technicians, setTechnicians] = useState([]);
@@ -35,8 +33,6 @@ function AppointmentsForm() {
     const data = {};
     data.vin = vin;
     data.date_time = combinedDateTime;
-    // data.appointmentDate = ;
-    // data.appointmentTime = ;
     data.reason = reason;
     data.customer = customer;
     data.technician = technician;
@@ -53,7 +49,6 @@ function AppointmentsForm() {
     const appointmentResponse = await fetch(appointmentUrl, fetchOptions);
     if (appointmentResponse.ok) {
           setVin('');
-        //   setDate_Time('');
           setAppointmentDate('');
           setAppointmentTime('');
           setReason('');
@@ -125,8 +120,6 @@ function AppointmentsForm() {
                   Please choose which technician
                   you'd like to service your automobile.
                 </p>
-
-
                 <div className="row">
                   <div className="row">
                     <div className="form-floating mb-3">
@@ -140,25 +133,19 @@ function AppointmentsForm() {
                       <label htmlFor="name">Customer</label>
                     </div>
                   </div>
-
-                {/* Date field */}
                 <div className="form-floating mb-3">
                   <input onChange={handleChangeAppointmentDate} value={appointmentDate} type="date" id="appointmentDate" name="appointmentDate" className="form-control" />
                   <label htmlFor="appointmentDate">Date</label>
                 </div>
-
-                {/* Time field */}
                 <div className="form-floating mb-3">
                   <input onChange={handleChangeAppointmentTime} value={appointmentTime} type="time" id="appointmentTime" name="appointmentTime" className="form-control" />
                   <label htmlFor="appointmentTime">Time</label>
                 </div>
-
                   <div className={spinnerClasses} id="loading-location-spinner">
                   <div className="spinner-grow text-secondary" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
-
                 <div className="mb-3">
                   <select onChange={handleChangeTechnician} name="technician" id="technician" className={dropdownClasses} required>
                     <option value="">Choose a service technician</option>
@@ -169,14 +156,12 @@ function AppointmentsForm() {
                     })}
                   </select>
                 </div>
-
                   <div className="row">
                     <div className="form-floating mb-3">
                       <input onChange={handleChangeReason} required placeholder="Reason" type="text" id="reason" name="reason" className="form-control" />
                       <label htmlFor="name">Reason</label>
                     </div>
                   </div>
-
                 </div>
                 <button className="btn btn-lg btn-primary">Create appointment</button>
               </form>

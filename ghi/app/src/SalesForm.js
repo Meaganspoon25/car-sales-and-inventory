@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 function SalesForm() {
   const [formData, setFormData] = useState({
     automobile: '',
@@ -9,7 +10,6 @@ function SalesForm() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
-
   const [automobiles, setAutomobiles] = useState([]);
   const [salespersons, setSalespersons] = useState([]);
   const [customers, setCustomers] = useState([]);
@@ -55,10 +55,10 @@ function SalesForm() {
       });
       setIsSubmitted(true);
     }
-  } catch (error) {
-    console.error('Failed to submit the form', error);
-  }
-};
+    } catch (error) {
+      console.error('Failed to submit the form', error);
+    }
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -144,7 +144,7 @@ function SalesForm() {
             <button type="submit" className="btn btn-primary">Create</button>
           </form>
           <div className={messageClasses} id="success-message">
-                    Congratulations! Your sale has been recorded!
+            Congratulations! Your sale has been recorded!
           </div>
         </div>
       </div>

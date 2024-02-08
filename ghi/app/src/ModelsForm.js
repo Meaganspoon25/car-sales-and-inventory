@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+
 function ModelsForm() {
   const [manufacturers, setManufacturers] = useState([])
   const [isSubmitted, setIsSubmitted] = useState(false);
-
   const [formData, setFormData] = useState({
     name: '',
     picture_url: '',
@@ -33,7 +33,6 @@ function ModelsForm() {
       delete adjustedFormData.manufacturer;
 
       const url = 'http://localhost:8100/api/models/';
-
 
     const fetchConfig = {
       method: "POST",
@@ -67,13 +66,6 @@ function ModelsForm() {
     });
   }
 
-//   let messageClasses = 'alert alert-success d-none mb-0';
-//   let formClasses = '';
-//   if (hasCreated) {
-//       messageClasses = 'alert alert-success mb-0';
-//       formClasses = 'd-none';
-//   }
-
   let messageClasses = isSubmitted ? 'alert alert-success mb-0' : 'd-none';
   let formClasses = isSubmitted ? 'd-none' : '';
 
@@ -87,12 +79,10 @@ function ModelsForm() {
               <input onChange={handleFormChange} value={formData.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
               <label htmlFor="name">Name</label>
             </div>
-
             <div className="form-floating mb-3">
               <input onChange={handleFormChange} value={formData.picture_url} placeholder="Picture URL" required type="text" name="picture_url" id="picture_url" className="form-control" />
               <label htmlFor="starts">Picture URL</label>
             </div>
-
             <div className="mb-3">
               <select onChange={handleFormChange} value={formData.manufacturer.id} required name="manufacturer" id="manufacturer" className="form-select">
                 <option value="">Choose a manufacturer</option>
@@ -106,7 +96,7 @@ function ModelsForm() {
             <button className="btn btn-primary">Create that model!</button>
           </form>
           <div className={messageClasses} id="success-message">
-                    Congratulations! Your model has been registered!
+            Congratulations! Your model has been registered!
           </div>
         </div>
       </div>

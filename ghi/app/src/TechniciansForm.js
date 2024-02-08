@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
 function TechnicianForm() {
@@ -88,14 +88,14 @@ function TechnicianForm() {
                 <button className="btn btn-lg btn-primary">Create technician</button>
             </form>
             <div className={messageClasses} id="success-message">
-                Congratulations! Your technician has been registered!
+              Congratulations! Your technician has been registered!
             </div>
             </div>
         </div>
         </div>
     </div>
     </div>
-);
+  );
 }
 
 export default TechnicianForm;

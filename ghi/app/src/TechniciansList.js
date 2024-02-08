@@ -18,14 +18,6 @@ function TechniciansList() {
     getData()
   }, []);
 
-//   const handleDelete = (TechnicianId) => {
-//     fetch(`http://localhost:8080/api/technicians/${technicianId}/`, { method: 'DELETE' })
-//       .then(() => {
-//         setTechnicians(technicians.filter(technician => technician.id !== technicianId));
-//       })
-//       .catch(error => console.error('Error deleting technician:', error));
-//   };
-
   return (
     <div className="my-5 container">
       <div className="row">
@@ -36,7 +28,6 @@ function TechniciansList() {
               <th>Employee ID</th>
               <th>First Name</th>
               <th>Last Name</th>
-              {/* <th>Delete</th> */}
             </tr>
           </thead>
           <tbody>
@@ -46,7 +37,6 @@ function TechniciansList() {
                   <td>{ technician.employee_id }</td>
                   <td>{ technician.first_name }</td>
                   <td>{ technician.last_name }</td>
-                  {/* <td><button onClick={() => handleDelete(hat.id)}>Delete</button></td> */}
                 </tr>
               );
             })}
