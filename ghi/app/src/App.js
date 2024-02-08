@@ -10,11 +10,11 @@ import ModelsForm from './ModelsForm';
 import AutomobilesList from './AutomobilesList';
 import AutomobilesForm from './AutomobilesForm';
 
-// import SalespeopleList from './SalespeopleList';
-// import SalespersonForm from './SalespersonForm';
+import SalespeopleList from './SalespeopleList';
+import SalespersonForm from './SalespersonForm';
 
-// import CustomersList from './CustomersList';
-// import CustomersForm from './CustomersForm';
+import CustomersList from './CustomersList';
+import CustomersForm from './CustomersForm';
 
 import SalesList from './SalesList';
 import SalesForm from './SalesForm';
