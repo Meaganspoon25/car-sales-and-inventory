@@ -635,7 +635,6 @@ Please see the React Components section for the Service Domain Features to see h
 
 
 ## React Compents
-
 Here we will explain how our React front-end components function.  We break this down into four categories:
 
 ### React Basic Features:
