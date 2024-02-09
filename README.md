@@ -4,8 +4,8 @@ CarCar is an application for managing the aspects of an automobile dealership. I
 
 Team:
 
-* **Student 1** - Auto Sales
-* **Student 2** - Auto Services
+* **Meagan Weatherspoon** - Auto Sales
+* **Damien Camel** - Auto Services
 
 ## Getting Started
 
@@ -14,7 +14,7 @@ Team:
 1. Fork this repository
 
 2. Clone the forked repository onto your local computer:
-git clone <<respository.url.here>>
+git clone <https://gitlab.com/dcamel/project-beta.git>
 
 3. Build and run the project using Docker with these commands:
 ```
@@ -394,6 +394,7 @@ List all salespeople Return Value:
 | List all salesrecords | GET | http://localhost:8090/api/sales/
 | Create a new sale | POST | http://localhost:8090/api/sales/
 | Show salesperson's salesrecords | GET | http://localhost:8090/api/sales/id/
+
 List all Salesrecords Return Value:
 ```
 {
