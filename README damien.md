@@ -5,7 +5,7 @@ CarCar is an application for managing the aspects of an automobile dealership. I
 Team:
 
 * **Student 1** - Auto Sales
-* **Student 2** - Auto Services
+* **Damien Camel** - Auto Services
 
 ## Getting Started
 
@@ -43,24 +43,8 @@ CarCar is made up of 3 microservices which interact with one another.
 
 Our Inventory and Sales domains work together with our Service domain to make everything here at **CarCar** possible.
 
-How this all starts is at our inventory domain. We keep a record of automobiles on our lot that are available to buy. Our sales and service microservices obtain information from the inventory domain, using two **pollers**, which talks to the inventory domain to keep track of which vehicles we have in our inventory so that the service and sales team always has up-to-date information.
+How this all starts is at our inventory domain. We keep a record of automobiles on our lot that are available to buy. Our sales and service microservices obtain information from the inventory domain, using a **poller**, which talks to the inventory domain to keep track of which vehicles we have in our inventory so that the service and sales team always has up-to-date information.
 
-Each poller is nestled under the Sales and Service apps.  While they retrieve the same information, they can be used however you would like.  In our current front-end, both the Sale and Service poller information remains unused.  The SalesForm to register a new Sale and the AppointmentForm to register a new Appointment fetch data from the Inventory API's Automobile Model.
-
-The pollers retrieve information every 60 seconds, and you are able to configure each to your own desires. The information that can be retrieved from it (the automobileVO) is currently formatted as:
-
-Getting a list of automobileVOs return value:
-```
-{
-	"automobilevos": [
-		{
-			"import_href": "/api/automobiles/VIN001/",
-			"vin": "VIN001",
-			"sold": false
-		},
-	]
-}
-```
 
 ## Accessing Endpoints to Send and View Data: Access Through Insomnia & Your Browser
 
@@ -116,8 +100,7 @@ Getting a list of manufacturers return value:
 | Update a specific vehicle model | PUT | http://localhost:8100/api/models/id/
 | Delete a specific vehicle model | DELETE | http://localhost:8100/api/models/id/
 
-Create and update a vehicle model (SEND THIS JSON BODY).
-Note: you may leave the picture_url field blank if you do not have an image link.
+Create and update a vehicle model (SEND THIS JSON BODY).  You can leave the picture-url field blank as an empty string:
 ```
 {
   "name": "Sebring",
@@ -473,11 +456,9 @@ Example:
 {
 	"technicians": [
 		{
-			"href": "/api/technicians/1/",
-			"id": 1,
-			"first_name": "Larry",
-			"last_name": "DarrylDarryl",
-			"employee_id": "E001"
+			"name": "Donald",
+			"employee_number": 1,
+			"id": 1
 		},
 ```
 
@@ -488,43 +469,36 @@ This would then lead to this:
 
 ```
 {
-	"href": "/api/technicians/1/",
-	"id": 1,
-	"first_name": "Larry",
-	"last_name": "DarrylDarryl",
-	"employee_id": "E001"
-},
+	"name": "Donald",
+	"employee_number": 1,
+	"id": 1
+}
 ```
 This how our technician detail is displayed. If you want to change the technician, just change the value at the end to match the "id" of the technician you want to display.
 
 CREATE TECHNICIAN - What if we hired a new technician (In this economy even)? To create a technician, you would use the following format to input the data and you would just submit this as a POST request.
 ```
 {
-	"first_name": "Stephanie",
-	"last_name": "Vanderkellen",
-	"employee_id": "E002"
+	"name": "Liz",
+	"employee_number": 2
 }
 ```
-As you can see, the data has the same format. In this example, we just changed the "name" field from "Larry" to "Stephanie". We also assigned her the "employee_number" value of "E002" instead of "E001".
-Once we have the data into your request, we just hit "Send" and it will create the technician "Stephanie". To verify that it worked, just select follow the "LIST TECHNICIAN" step from above to show all technicians.
-With any luck, both Larry and Stephanie will be there.
-Here is what you should see if you select "LIST TECHNICIAN" after you "CREATE TECHNICIAN" with Stephanie added in:
+As you can see, the data has the same format. In this example, we just changed the "name" field from "Donald" to "Liz". We also assigned her the "employee_number" value of "2" instead of "1".
+Once we have the data into your request, we just hit "Send" and it will create the technician "Liz". To verify that it worked, just select follow the "LIST TECHNICIAN" step from above to show all technicians.
+With any luck, both Donald and Liz will be there.
+Here is what you should see if you select "LIST TECHNICIAN" after you "CREATE TECHNICIAN" with Liz added in:
 ```
 {
 	"technicians": [
 		{
-			"href": "/api/technicians/1/",
-			"id": 1,
-			"first_name": "Larry",
-			"last_name": "DarrylDarryl",
-			"employee_id": "E001"
+			"name": "Donald",
+			"employee_number": 1,
+			"id": 1
 		},
 		{
-			"href": "/api/technicians/2/",
-			"id": 2,
-			"first_name": "Stephanie",
-			"last_name": "Vanderkellen",
-			"employee_id": "E002"
+			"name": "Liz",
+			"employee_number": 1,
+			"id": 2
 		},
 ```
 
@@ -538,9 +512,8 @@ If you get an error, make sure your server is running and that you are feeding i
 If you feed in the following:
 ```
 {
-	"first_name": "Stephanie",
-	"last_name": "Vanderkellen",
-	"employee_id": "E002"
+	"name": "Liz",
+	"employee_number": 3,
 	"favorite_food": "Tacos"
 }
 
@@ -553,10 +526,11 @@ You will get an error because the system doesn't know what what to do with "Taco
 
 | Action | Method | URL
 | ----------- | ----------- | ----------- |
-| List service appointments | GET | http://localhost:8080/api/appointments/
-| Service appointment detail | GET | http://localhost:8080/api/appointments/<int:id>
-| Create service appointment | POST | http://localhost:8080/api/appointments/
-| Delete service appointment | DELETE | http://localhost:8080/api/appointments/<int:id>
+| List service appointments | GET | http://localhost:8080/api/serviceappointment/
+| Service appointment detail | GET | http://localhost:8080/api/serviceappointment/<int:id>
+| Service appointment history | GET | http://localhost:8080/api/servicehistory/<int:vin (OPTIONAL)>
+| Create service appointment | POST | http://localhost:8080/api/serviceappointment/
+| Delete service appointment | DELETE | http://localhost:8080/api/serviceappointment/<int:id>
 
 
 LIST SERVICE APPOINTMENT: This will return a list of all current service appointment.
@@ -567,132 +541,75 @@ Also, the "date" and "time" fields HAVE TO BE IN THIS FORMAT
 {
 	"service_appointment": [
 		{
-			"href": "/api/appointments/1/",
 			"id": 1,
-			"date_time": "2024-02-06T15:31:59+00:00",
-			"reason": "mah tires",
-			"status": false,
-			"customer": "Barry",
 			"vin": "1222",
-			"technician": "E001"
+			"customer_name": "Barry",
+			"time": "12:30:00",
+			"date": "2021-07-14",
+			"reason": "mah tires",
+			"vip_status": false,
+			"technician": "Liz"
 		},
 ```
 SERVICE APPOINTMENT DETAIL: This will return the detail of each specific service appointment.
 ```
 {
-	"href": "/api/appointments/1/",
 	"id": 1,
-	"date_time": "2024-02-06T15:31:59+00:00",
-	"reason": "mah tires",
-	"status": false,
-	"customer": "Barry",
 	"vin": "1222",
-	"technician": "E001"
+	"customer_name": "Barry",
+	"time": "12:30:00",
+	"date": "2021-07-14",
+	"reason": "mah tires",
+	"vip_status": false,
+	"technician": "Liz"
 }
 ```
+SERVICE APPOINTMENT HISTORY: This will show the detail based on the "VIN" that is input. You will see ALL service appointments for the vehicle associated with the "vin" that you input.
+At the end of the URL, tack on the vin associated with the vehicle that you wish to view. If you leave this field blank, it will show all service history for all vehicles.
+```
+{
+	"service_history": [
+		{
+			"id": 1,
+			"vin": "1222",
+			"customer_name": "Barry",
+			"time": "12:30:00",
+			"date": "2021-07-14",
+			"reason": "mah tires",
+			"vip_status": false,
+			"technician": "Liz"
+		},
+		{
+			"id": 6,
+			"vin": "1222",
+			"customer_name": "Gary",
+			"time": "12:30:00",
+			"date": "2021-07-11",
+			"reason": "new car",
+			"vip_status": false,
+			"technician": "Caleb"
+		}
+	]
+}
+```
+If we add "1222" to the request (eg. http://localhost:8080/api/servicehistory/1222), then it will show the above. If you put a vin that does not exist in the system, it will return a blank list.
+
+
 CREATE SERVICE APPOINTMENT - This will create a service appointment with the data input. It must follow the format. Remember, the "id" is automatically generated, so don't fill that in. To verify
 that it was added, just look at your service appointment list after creating a service appointment and it should be there.
 ```
-	{
-		"date_time": "2024-04-07T15:31:59+00:00",
-		"reason": "mah tires",
-		"status": "created",
-		"customer": "Barry",
-		"vin": "1222",
-		"technician": "E001"
-	}
+		{
+			"id": 6,
+			"vin": "1222",
+			"customer_name": "Gary",
+			"time": "12:30:00",
+			"date": "2021-07-11",
+			"reason": "new car",
+			"vip_status": false,
+			"technician": "Caleb"
+		}
 
 ```
 DELETE SERVICE APPOINTMENT - Just input the "id" of the service appointment that you want to delete at the end of the url. For example, if we wanted to delete the above service history appointment for Barry
-because we accidently input his name as "Gary", we would just enter 'http://localhost:8080/api/appointments/6' into the field and send the request. We will receive a confirmation message saying that
+because we accidently input his name as "Gary", we would just enter 'http://localhost:8080/api/serviceappointment/6' into the field and send the request. We will receive a confirmation message saying that
 the service appointment was deleted.
-
-SERVICE APPOINTMENT HISTORY: This is calculated on the front-end through React.  If you wish to configure your poller to obtain this information, you are free to do so.
-
-Please see the React Components section for the Service Domain Features to see how it has been done.
-
-
-## React Compents
-
-Here we will explain how our React front-end components function.  We break this down into four categories:
-
-### React Basic Features:
-<!-- mainpage / index / index.css / app.js / nav.js -->
-
-### Inventory Domain Features:
-<!-- manufacturers / models / automobiles  -->
-The Inventory domain focuses on the management of CarCar's inventory stock.  On the front end, we have the following .js files for you to manage the physical automobile stock and information (manufacturer and models).
-
-#### Manufacturers Form
-The Manufacturer Form allows the creation of new manufacturer data files.  The form is straightforward; requiring the new manufacturer's name (name).  The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8100/api/manufacturers/ .
-
-As the user is inputting information into the input fields, the handleSubmit functions are updating the component's states with the current value.
-
-When the user has finished and submits the form, the asynchronous fetch call is made.  The handleSubmit function will wait until the fetch request is completed.  If the response from the Inventory API indicates a status of OK, meaning the manufacturer entry was successfully created, the handleSubmit function resets the variables to empty strings and "hasCreated" is set to true.
-
-The conditional rendering of the form will create a success message when the state change of "hasCreated" becomes true.  The page will re-render, alerting the user and displaying the customizable success-message text.
-
-#### Manufacturers List
-The Manufacturer List displays all entries of the manufacturer database.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8100/api/manufacturers/ . If the Inventory API returns a successful response of response.ok being true, the data is extracted from the response and re-rendered to be displayed in the page's table.
-
-The useEffect hook receives an empty array at the initial page load.  Upon getData's successful fetch, useEffect updates the manufacturers state with the retrieved data, causing the component to rerender with the list of manufacturers.
-
-#### Models Form
-The Models Form allows the creation of new model data files.  The form is straightforward; requiring the new model's name (name), picture URL (picture_url), and manufacturer (manufacturer).
-
-The manufacturer information is fetched from http://localhost:8100/api/manufacturers/  This information is stored in the manufacturers state, making the list of manufacturers available for selection in the form.  The useEffect hook ensures this infomration is present before the user interacts with the form
-
-The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8100/api/models/ .
-
-As the user is inputting information into the input fields, the handleSubmit functions are updating the component's states with the current value.
-
-When the user has finished and submits the form, the asynchronous fetch call is made.  The handleSubmit function will wait until the fetch request is completed.  If the response from the Inventory API indicates a status of OK, meaning the model entry was successfully created, the handleSubmit function resets the variables to empty strings and "hasCreated" is set to true.
-
-The conditional rendering of the form will create a success message when the state change of "hasCreated" becomes true.  The page will re-render, alerting the user and displaying the customizable success-message text.
-
-#### Models List
-The Models List displays all entries of the models database.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8100/api/models/ . If the Inventory API returns a successful response of response.ok being true, the data is extracted from the response and re-rendered to be displayed in the page's table.
-
-The useEffect hook receives an empty array at the initial page load.  Upon getData's successful fetch, useEffect updates the models state with the retrieved data, causing the component to rerender with the list of models.
-
-Regarding the Picture URL field:  In the back-end, the picture_url field is allowed to be blank.  Here in the Models List form, the form checks if the string is empty or contains information.  If information is found, it handles the URL and generates an image for display.  If the string is blank, a message indicating "No URL provided" is displayed with the color red.
-
-#### Automobiles Form
-The Models Form allows the creation of new model data files.  The form is straightforward; requiring the new model's name (name), picture URL (picture_url), and manufacturer (manufacturer).
-
-The manufacturer information is fetched from http://localhost:8100/api/manufacturers/  This information is stored in the manufacturers state, making the list of manufacturers available for selection in the form.  The useEffect hook ensures this infomration is present before the user interacts with the form
-
-The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8100/api/models/ .
-
-As the user is inputting information into the input fields, the handleSubmit functions are updating the component's states with the current value.
-
-When the user has finished and submits the form, the asynchronous fetch call is made.  The handleSubmit function will wait until the fetch request is completed.  If the response from the Inventory API indicates a status of OK, meaning the model entry was successfully created, the handleSubmit function resets the variables to empty strings and "hasCreated" is set to true.
-
-The conditional rendering of the form will create a success message when the state change of "hasCreated" becomes true.  The page will re-render, alerting the user and displaying the customizable success-message text.
-
-#### Automobiles List
-
-### Sales Domain Features:
-<!-- Customers, Salespeople, and Sales -->
-
-### Services Domain Features:
-<!-- Appointments, and Technicians -->
-The Services domain focuses on the management of CarCar's appointment registration.  On the front end, we have the following .js files for you to manage appointments and technician staff.
-
-#### Technician Form
-The Technician Form allows the creation of new technician data files.  The form is straightforward; requiring the new technician's employee ID (employee_id), first name (first_name), and last name (last_name).  The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8080/api/technicians/ .
-
-As the user is inputting information into the input fields, the handleSubmit functions are updating the component's states with the current value.
-
-When the user has finished and submits the form, the asynchronous fetch call is made.  The handleSubmit function will wait until the fetch request is completed.  If the response from the Service API indicates a status of OK, meaning the technician entry was successfully created, the handleSubmit function resets the variables to empty strings and "hasCreated" is set to true.
-
-The conditional rendering of the form will create a success message when the state change of "hasCreated" becomes true.  The page will re-render, alerting the user and displaying the customizable success-message text.
-
-#### Technician List
-The Technician List displays all entries of the technician database.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/technicians/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response and re-rendered to be displayed in the page's table.
-
-The useEffect hook receives an empty array at the initial page load.  Upon getData's successful fetch, useEffect updates the technicians state with the retrieved data, causing the component to rerender with the list of technicians.
-
-#### Appointment Form
-#### Appointment List
-#### Appointment History

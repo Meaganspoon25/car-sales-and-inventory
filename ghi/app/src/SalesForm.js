@@ -35,28 +35,51 @@ function SalesForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-  const url = 'http://localhost:8090/api/sales/';
-  const fetchConfig = {
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+    const url = 'http://localhost:8090/api/sales/';
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  try {
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      setFormData({
-        automobile: '',
-        salesperson: '',
-        customer: '',
-        price: '',
-      });
-      setIsSubmitted(true);
-    }
+    try {
+      const response = await fetch('http://localhost:8090/api/sales/', fetchConfig);
+      if (response.ok) {
+        const automobileVIN = formData.automobile;
+        await updateAutomobileSoldStatus(automobileVIN);
+        setFormData({
+          automobile: '',
+          salesperson: '',
+          customer: '',
+          price: '',
+        });
+        setIsSubmitted(true);
+      } else {
+        console.error('Failed to record the sale', await response.text());
+      }
     } catch (error) {
       console.error('Failed to submit the form', error);
+    }
+  };
+
+  const updateAutomobileSoldStatus = async (vin) => {
+    const url = `http://localhost:8100/api/automobiles/${vin}/`;
+    const fetchConfig = {
+      method: 'PUT',
+      body: JSON.stringify({ sold: true }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await fetch(url, fetchConfig);
+      if (!response.ok) throw new Error('Failed to update the automobile status');
+      console.log('Automobile sold status updated successfully');
+    } catch (error) {
+      console.error('Error updating automobile status:', error);
     }
   };
 

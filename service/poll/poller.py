@@ -24,7 +24,7 @@ def get_automobiles():
                     "sold": automobile["sold"],
                     },
             )
-        print("Service Poller got the data!")
+        print("Service Poller retrieved the data.")
     else:
         print(f"Failed to fetch automobiles: {response.status_code}")
 
@@ -36,7 +36,7 @@ def poll():
 
         except Exception as e:
             print(e, file=sys.stderr)
-            print("some kind of an error")
+            print("Service Poller has received an error.")
         time.sleep(60)
 
 

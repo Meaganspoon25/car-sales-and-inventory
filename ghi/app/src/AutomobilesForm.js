@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+
 function AutomobilesForm() {
   const [models, setModels] = useState([])
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -17,6 +18,8 @@ function AutomobilesForm() {
     if (response.ok) {
       const data = await response.json();
       setModels(data.models);
+    } else {
+      console.error('An error occurred fetching the data')
     }
   }
 
@@ -75,15 +78,15 @@ function AutomobilesForm() {
           <form className={formClasses} onSubmit={handleSubmit} id="create-automobile-form">
           <div className="form-floating mb-3">
               <input onChange={handleFormChange} value={formData.vin} placeholder="VIN" required type="text" name="vin" id="vin" className="form-control" />
-              <label htmlFor="name">VIN</label>
+              <label htmlFor="vin">VIN</label>
             </div>
             <div className="form-floating mb-3">
               <input onChange={handleFormChange} value={formData.color} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
-              <label htmlFor="name">Color</label>
+              <label htmlFor="color">Color</label>
             </div>
             <div className="form-floating mb-3">
               <input onChange={handleFormChange} value={formData.year} placeholder="Year" required type="text" name="year" id="year" className="form-control" />
-              <label htmlFor="starts">Year</label>
+              <label htmlFor="year">Year</label>
             </div>
             <div className="mb-3">
               <select onChange={handleFormChange} value={formData.model} required name="model" id="model" className="form-select">

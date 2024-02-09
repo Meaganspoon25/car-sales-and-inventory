@@ -124,13 +124,13 @@ function AppointmentsForm() {
                   <div className="row">
                     <div className="form-floating mb-3">
                       <input onChange={handleChangeVin} required placeholder="Automobile VIN" type="text" id="vin" name="vin" className="form-control" />
-                      <label htmlFor="name">Automobile VIN</label>
+                      <label htmlFor="vin">Automobile VIN</label>
                     </div>
                   </div>
                   <div className="row">
                     <div className="form-floating mb-3">
                       <input onChange={handleChangeCustomer} required placeholder="Customer" type="text" id="customer" name="customer" className="form-control" />
-                      <label htmlFor="name">Customer</label>
+                      <label htmlFor="customer">Customer</label>
                     </div>
                   </div>
                 <div className="form-floating mb-3">
@@ -159,7 +159,7 @@ function AppointmentsForm() {
                   <div className="row">
                     <div className="form-floating mb-3">
                       <input onChange={handleChangeReason} required placeholder="Reason" type="text" id="reason" name="reason" className="form-control" />
-                      <label htmlFor="name">Reason</label>
+                      <label htmlFor="reason">Reason</label>
                     </div>
                   </div>
                 </div>

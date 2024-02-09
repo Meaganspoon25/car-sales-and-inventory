@@ -30,6 +30,8 @@ function TechnicianForm() {
           setFirst_Name('');
           setLast_Name('');
           setHasCreated(true);
+    } else {
+      console.error('An error occurred fetching the data')
     }
   }
 
@@ -73,15 +75,15 @@ function TechnicianForm() {
                 <div className="row">
                     <div className="form-floating mb-3">
                     <input onChange={handleChangeEmployee_Id} required placeholder="Technician ID" type="text" id="employee_id" name="employee_id" className="form-control" />
-                    <label htmlFor="name">The Technician's Employee ID</label>
+                    <label htmlFor="employee_id">The Technician's Employee ID</label>
                     </div>
                     <div className="form-floating mb-3">
                     <input onChange={handleChangeFirst_Name} required placeholder="Techician's First Name" type="text" id="first_name" name="first_name" className="form-control" />
-                    <label htmlFor="name">The Technician's First Name</label>
+                    <label htmlFor="first_name">The Technician's First Name</label>
                     </div>
                     <div className="form-floating mb-3">
                     <input onChange={handleChangeLast_Name} required placeholder="Techician's Last Name" type="text" id="last_name" name="last_name" className="form-control" />
-                    <label htmlFor="name">The Technician's Last Name</label>
+                    <label htmlFor="last_name">The Technician's Last Name</label>
                     </div>
                 </div>
                 </div>

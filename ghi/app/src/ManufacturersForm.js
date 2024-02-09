@@ -19,13 +19,15 @@ function ManufacturersForm() {
         'Content-Type': 'application/json',
       },
     };
-    
+
     const manufacturerResponse = await fetch(manufacturerUrl, fetchOptions);
     if (manufacturerResponse.ok) {
           setName('');
           setHasCreated(true);
+    } else {
+        console.error('An error occurred fetching the data')
+      }
     }
-  }
 
     const handleChangeName = (event) => {
         const value = event.target.value;

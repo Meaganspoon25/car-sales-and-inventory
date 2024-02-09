@@ -16,6 +16,8 @@ function ModelsForm() {
     if (response.ok) {
       const data = await response.json();
       setManufacturers(data.manufacturers);
+    } else {
+      console.error('An error occurred fetching the manufacturer data')
     }
   }
 
@@ -53,7 +55,6 @@ function ModelsForm() {
       setIsSubmitted(true);
     }
   }
-
 
   const handleFormChange = (e) => {
     const value = e.target.value;
