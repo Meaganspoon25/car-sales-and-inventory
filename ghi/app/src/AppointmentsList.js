@@ -5,6 +5,7 @@ function AppointmentsList() {
   const [appointments, setAppointments] = useState([]);
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [vipVins, setVipVins] = useState(new Set());
 
   const getData = async ()=> {
     const response = await fetch('http://localhost:8080/api/appointments/?status=created');
@@ -43,8 +44,6 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
     console.error('Error updating appointment status', error);
   }
 };
-
-  const [vipVins, setVipVins] = useState(new Set());
 
   const fetchVipVins = async () => {
     const response = await fetch('http://localhost:8100/api/automobiles/');

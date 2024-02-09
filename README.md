@@ -640,7 +640,7 @@ The useEffect hook receives an empty array at the initial page load.  Upon getDa
 #### Models Form
 The Models Form allows the creation of new model data files.  The form is straightforward; requiring the new model's name (name), picture URL (picture_url), and manufacturer (manufacturer).
 
-The manufacturer information is fetched from http://localhost:8100/api/manufacturers/  This information is stored in the manufacturers state, making the list of manufacturers available for selection in the form.  The useEffect hook ensures this infomration is present before the user interacts with the form
+The manufacturer information is fetched from http://localhost:8100/api/manufacturers/  This information is stored in the manufacturers state, making the list of manufacturers available for selection in the form.  The useEffect hook ensures this infomration is present before the user interacts with the form.
 
 The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8100/api/models/ .
 
@@ -658,22 +658,28 @@ The useEffect hook receives an empty array at the initial page load.  Upon getDa
 Regarding the Picture URL field:  In the back-end, the picture_url field is allowed to be blank.  Here in the Models List form, the form checks if the string is empty or contains information.  If information is found, it handles the URL and generates an image for display.  If the string is blank, a message indicating "No URL provided" is displayed with the color red.
 
 #### Automobiles Form
-The Models Form allows the creation of new model data files.  The form is straightforward; requiring the new model's name (name), picture URL (picture_url), and manufacturer (manufacturer).
+The Automobiles Form allows the creation of new automobile data files.  The form requires the new automobile's VIN (vin), color (color), year(year), and model (model).  By default, a newly created automobile's sold status is set to No.
 
-The manufacturer information is fetched from http://localhost:8100/api/manufacturers/  This information is stored in the manufacturers state, making the list of manufacturers available for selection in the form.  The useEffect hook ensures this infomration is present before the user interacts with the form
+The model information is fetched from http://localhost:8100/api/models/  This information is stored in the models state, making the list of models available for selection in the form.  The useEffect hook ensures this infomration is present before the user interacts with the form
 
-The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8100/api/models/ .
+The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8100/api/automobiles/ .
 
 As the user is inputting information into the input fields, the handleSubmit functions are updating the component's states with the current value.
 
-When the user has finished and submits the form, the asynchronous fetch call is made.  The handleSubmit function will wait until the fetch request is completed.  If the response from the Inventory API indicates a status of OK, meaning the model entry was successfully created, the handleSubmit function resets the variables to empty strings and "hasCreated" is set to true.
+When the user has finished and submits the form, the asynchronous fetch call is made.  The handleSubmit function will wait until the fetch request is completed.  If the response from the Inventory API indicates a status of OK, meaning the automobile entry was successfully created, the handleSubmit function resets the variables to empty strings and "hasCreated" is set to true.
 
 The conditional rendering of the form will create a success message when the state change of "hasCreated" becomes true.  The page will re-render, alerting the user and displaying the customizable success-message text.
 
 #### Automobiles List
+The Automobile List displays all entries of the automobile database.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8100/api/automobiles/ . If the Inventory API returns a successful response of response.ok being true, the data is extracted from the response and re-rendered to be displayed in the page's table.
+
+The useEffect hook receives an empty array at the initial page load.  Upon getData's successful fetch, useEffect updates the models state with the retrieved data, causing the component to rerender with the list of models.
+
+Note regarding the Sold field:  The SalesForm described later will be submitting a PUT request to update when an automobile is sold.
 
 ### Sales Domain Features:
 <!-- Customers, Salespeople, and Sales -->
+The Sales domain focuses on the management of CarCar's appointment registration.  On the front end, we have the following .js files for you to manage customers, sales team members, and sale recordds.
 
 ### Customers Form
 I created a React component named "CustomersForm" that creates a form to add customer information. It utilizes React Hooks like useState and useEffect to manage form data and submission state. The form handles input changes, form submission, and displays a success message upon successful submission. Additionally, it fetches data when the component mounts. The code follows a typical React pattern of handling state changes and user interactions to create a dynamic and interactive form component.
@@ -727,5 +733,36 @@ The Technician List displays all entries of the technician database.  The getDat
 The useEffect hook receives an empty array at the initial page load.  Upon getData's successful fetch, useEffect updates the technicians state with the retrieved data, causing the component to rerender with the list of technicians.
 
 #### Appointment Form
+The Appointment Form allows the creation of new appointment data files.  The form requires the specific automobile's VIN (vin), customer name (customer), date and time (date_time), requested technician (technician), and reason for service (reason).
+
+The technician information is fetched from http://localhost:8080/api/technicians/  This information is stored in the technicians state, making the list of technicians available for selection in the form.  The useEffect hook ensures this infomration is present before the user interacts with the form.
+
+The handleSubmit function prevents the default submission to allow for a new data object to be created.  The API call is defined to be a POST request, which will be directed to http://localhost:8080/api/appointments/ .
+
+Note:  notice the combinedDateTime variable.  The date and time inputs are combined into a single date-time string following ISO 8601 format.
+
+As the user is inputting information into the input fields, the handleSubmit functions are updating the component's states with the current value.
+
+When the user has finished and submits the form, the asynchronous fetch call is made.  The handleSubmit function will wait until the fetch request is completed.  If the response from the Service API indicates a status of OK, meaning the appointment entry was successfully created, the handleSubmit function resets the variables to empty strings and "hasCreated" is set to true.
+
+The conditional rendering of the form will create a success message when the state change of "hasCreated" becomes true.  The page will re-render, alerting the user and displaying the customizable success-message text.
+
 #### Appointment List
+The Appointment List displays all appointment database entries marked with a status of "created".  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response and filtered for only "created" status entries.  The result is re-rendered to be displayed in the page's table.
+
+Note the Date and Ttime columns:  Admittedly a bit tricky to set up, the date-time field is split into two columns for viewer ease.  The initial date-time value is formed by creating a date object, then manipulating the object to display the specific information.  The formattedDate has is currently configured to ignore a 0 infront of the month and day number display.
+
+Note the Cancel and Finish buttons:  We have an updateAppointmentStatus function to send a PUT request to a specific appointment through http://localhost:8080/api/appointments/${appointmentId}/ .  The PUT is designed to send the update request containing only the specific appointment's status of "cancelled" or "finished" depending on which button is selected.  As the buttons are clicked and the status receipt is confirmed, the list is updated.  As these appointments are no longer under the status of "created", they will not be included in this filtered list page.
+
+The useEffect hook receives an empty array at the initial page load.  Upon getData's successful fetch, useEffect updates the appointments state with the retrieved data, causing the component to rerender with the list of filtered appointments.
+
 #### Appointment History
+The Appointment History initially displays all appointment database entries.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response.  The result is re-rendered to be displayed in the page's table.
+
+Note the VIP column:  This is using the fetchVipVins function, which fetches the current automobile list through the Inventory API by sending a GET request to http://localhost:8100/api/automobiles/ .  A new array is created containing only the VINs of each automobile, which is then passed to create a new "set" object, stripping away duplicate VINs.  Now we have the state vipVins which holds the filtered information.
+
+In the JSX, the mapping generates a row for each iteration of the filtered (created status) appointment list.  It checks the vipVins list if it "has" the current row's vin.  If it does, "Yes ⭐" is displayed.  If not, a simple "No".  We hope the emoji is useful for catching the staff's eyes.
+
+Note the Date and Time columns:  They function the same as the Appointment List mentioned above.
+
+Note the Search by VIN feature: the handleFilterVinChange function uses an event that triggers the function call.  When the user inputs text ("onChange"), the setFilterVinValue is called which updates after each new field change is done by the user.  This goes to filteredAppointments which filters the appointment list based off the inputted VIN entry.  We have specifically set this to not be case-sensitive, so a user doesn't have to worry about the capitlization of letters.  With each paste or keystroke, the user's list will refresh with matching entries of that VIN.
