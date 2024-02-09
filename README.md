@@ -36,7 +36,7 @@ CarCar is made up of 3 microservices which interact with one another.
 - **Services**
 - **Sales**
 
-![Diagram Img](<Project_Beta_Meagan_Damien_02.png>)
+![Diagram Img](<CarCarDiagram.png>)
 
 ## Integration - How we put the "team" in "team"
 
