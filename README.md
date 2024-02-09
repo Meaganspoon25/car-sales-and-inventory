@@ -81,7 +81,7 @@ Create and Update a manufacturer (SEND THIS JSON BODY):
 - You cannot make two manufacturers with the same name
 ```
 {
-  "name": "Chrysler"
+    "name": "Chrysler"
 }
 ```
 The return value of creating, viewing, updating a single manufacturer:
@@ -95,13 +95,13 @@ The return value of creating, viewing, updating a single manufacturer:
 Getting a list of manufacturers return value:
 ```
 {
-  "manufacturers": [
-    {
-      "href": "/api/manufacturers/1/",
-      "id": 1,
-      "name": "Daimler-Chrysler"
-    }
-  ]
+    "manufacturers": [
+        {
+            "href": "/api/manufacturers/1/",
+            "id": 1,
+            "name": "Daimler-Chrysler"
+        }
+    ]
 }
 ```
 
@@ -119,50 +119,50 @@ Create and update a vehicle model (SEND THIS JSON BODY).
 Note: you may leave the picture_url field blank if you do not have an image link.
 ```
 {
-  "name": "Sebring",
-  "picture_url": "image.yourpictureurl.com"
-  "manufacturer_id": 1
+    "name": "Sebring",
+    "picture_url": "image.yourpictureurl.com"
+    "manufacturer_id": 1
 }
 ```
 
 Updating a vehicle model can take the name and/or picture URL:
 ```
 {
-  "name": "Sebring",
-  "picture_url": "image.yourpictureurl.com"
+    "name": "Sebring",
+    "picture_url": "image.yourpictureurl.com"
 }
 ```
 Return value of creating or updating a vehicle model:
 - This returns the manufacturer's information as well
 ```
 {
-  "href": "/api/models/1/",
-  "id": 1,
-  "name": "Sebring",
-  "picture_url": "image.yourpictureurl.com",
-  "manufacturer": {
-    "href": "/api/manufacturers/1/",
+    "href": "/api/models/1/",
     "id": 1,
-    "name": "Daimler-Chrysler"
+    "name": "Sebring",
+    "picture_url": "image.yourpictureurl.com",
+    "manufacturer": {
+        "href": "/api/manufacturers/1/",
+        "id": 1,
+        "name": "Daimler-Chrysler"
   }
 }
 ```
 Getting a List of Vehicle Models Return Value:
 ```
 {
-  "models": [
-    {
-      "href": "/api/models/1/",
-      "id": 1,
-      "name": "Sebring",
-      "picture_url": "image.yourpictureurl.com",
-      "manufacturer": {
-        "href": "/api/manufacturers/1/",
-        "id": 1,
-        "name": "Daimler-Chrysler"
-      }
-    }
-  ]
+    "models": [
+        {
+            "href": "/api/models/1/",
+            "id": 1,
+            "name": "Sebring",
+            "picture_url": "image.yourpictureurl.com",
+            "manufacturer": {
+                "href": "/api/manufacturers/1/",
+                "id": 1,
+                "name": "Daimler-Chrysler"
+            }
+        }
+    ]
 }
 ```
 
@@ -182,13 +182,13 @@ Create an automobile (SEND THIS JSON BODY):
 - You cannot make two automobiles with the same vin
 ```
 {
-  "color": "red",
-  "year": 2012,
-  "vin": "1C3CC5FB2AN120174",
-  "model_id": 1
+    "color": "red",
+    "year": 2012,
+    "vin": "1C3CC5FB2AN120174",
+    "model_id": 1
 }
 ```
-Return Value of Creating an Automobile:
+Detail of a Single Automobile:
 ```
 {
 	"href": "/api/automobiles/1C3CC5FB2AN120174/",
@@ -215,54 +215,54 @@ example url: http://localhost:8100/api/automobiles/1C3CC5FB2AN120174/
 Return Value:
 ```
 {
-  "href": "/api/automobiles/1C3CC5FB2AN120174/",
-  "id": 1,
-  "color": "green",
-  "year": 2011,
-  "vin": "1C3CC5FB2AN120174",
-  "model": {
-    "href": "/api/models/1/",
+    "href": "/api/automobiles/1C3CC5FB2AN120174/",
     "id": 1,
-    "name": "Sebring",
-    "picture_url": "image.yourpictureurl.com",
-    "manufacturer": {
-      "href": "/api/manufacturers/1/",
-      "id": 1,
-      "name": "Daimler-Chrysler"
+    "color": "green",
+    "year": 2011,
+    "vin": "1C3CC5FB2AN120174",
+    "model": {
+            "href": "/api/models/1/",
+            "id": 1,
+            "name": "Sebring",
+            "picture_url": "image.yourpictureurl.com",
+            "manufacturer": {
+                "href": "/api/manufacturers/1/",
+                "id": 1,
+                "name": "Daimler-Chrysler"
+            }
     }
-  }
 }
 ```
 You can update the color and/or year of an automobile (SEND THIS JSON BODY):
 ```
 {
-  "color": "red",
-  "year": 2012
+    "color": "red",
+    "year": 2012
 }
 ```
 Getting a list of Automobile Return Value:
 ```
 {
-  "autos": [
-    {
-      "href": "/api/automobiles/1C3CC5FB2AN120174/",
-      "id": 1,
-      "color": "yellow",
-      "year": 2013,
-      "vin": "1C3CC5FB2AN120174",
-      "model": {
-        "href": "/api/models/1/",
-        "id": 1,
-        "name": "Sebring",
-        "picture_url": "image.yourpictureurl.com",
-        "manufacturer": {
-          "href": "/api/manufacturers/1/",
-          "id": 1,
-          "name": "Daimler-Chrysler"
+    "autos": [
+        {
+            "href": "/api/automobiles/1C3CC5FB2AN120174/",
+            "id": 1,
+            "color": "yellow",
+            "year": 2013,
+            "vin": "1C3CC5FB2AN120174",
+            "model": {
+                "href": "/api/models/1/",
+                "id": 1,
+                "name": "Sebring",
+                "picture_url": "image.yourpictureurl.com",
+                "manufacturer": {
+                    "href": "/api/manufacturers/1/",
+                    "id": 1,
+                    "name": "Daimler-Chrysler"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 # Sales Microservice
@@ -288,18 +288,31 @@ The reason for integration between these two microservices is that when recordin
 To create a Customer (SEND THIS JSON BODY):
 ```
 {
-	"name": "John Johns",
-	"address": "1212 Ocean Street",
-	"phone_number": 9804357878
+	"first_name": "Test004",
+	"last_name": "Last004",
+	"address": "444 Jose Drive Dallas, TX 75001",
+	"phone_number": "444-444-4444"
 }
 ```
-Return Value of Creating a Customer:
+Detail of a Single Customer:
 ```
 {
-	"id: "1",
-	"name": "John Johns",
-	"address": "1212 Ocean Street",
-	"phone_number": 9804357878
+	"appointments": {
+		"href": "/api/appointments/1/",
+		"id": 1,
+		"date_time": "2024-02-06T15:31:59+00:00",
+		"reason": "Oil Change",
+		"status": "cancelled",
+		"customer": "Test 01",
+		"vin": "VIN001",
+		"technician": {
+			"href": "/api/technicians/1/",
+			"id": 1,
+			"first_name": "Larry01a",
+			"last_name": "LDD",
+			"employee_id": "E001"
+		}
+	}
 }
 ```
 Return value of Listing all Customers:
@@ -307,16 +320,18 @@ Return value of Listing all Customers:
 {
 	"customers": [
 		{
-			"id",
-			"name": "Martha Stewart",
-			"address": "1313 Baker Street",
-			"phone_number": "980720890"
+			"first_name": "Test002",
+			"last_name": "Last002",
+			"address": "222 Jose Drive Dallas, TX 75001",
+			"phone_number": "222-222-2222",
+			"id": 2
 		},
 		{
-			"id",
-			"name": "John Johns",
-			"address": "1212 Ocean Street",
-			"phone_number": "9804357878"
+			"first_name": "Test003",
+			"last_name": "Last003",
+			"address": "333 Jose Drive Dallas, TX 75001",
+			"phone_number": "333-333-3333",
+			"id": 3
 		}
 	]
 }
@@ -325,34 +340,48 @@ Return value of Listing all Customers:
 | Action | Method | URL
 | ----------- | ----------- | ----------- |
 | List salespeople | GET | http://localhost:8090/api/salespeople/
-| Salesperson details | GET | http://localhost:8090/api/salesperson/id/
+| Salesperson details | GET | http://localhost:8090/api/salespeople/id/
 | Create a salesperson | POST | http://localhost:8090/api/salespeople/
-| Delete a salesperson | DELETE | http://localhost:8090/api/salesperson/id/
+| Delete a salesperson | DELETE | http://localhost:8090/api/salespeople/id/
 
 
 To create a salesperson (SEND THIS JSON BODY):
 ```
 {
-	"name": "Jane Doe",
-	"employee_number": 1
+	"first_name": "Sales004",
+	"last_name": "LastSales004",
+	"employee_id": "Sale004"
 }
 ```
-Return Value of creating a salesperson:
+Detail of a single salesperson:
 ```
 {
-	"id": 1,
-	"name": "Liz",
-	"employee_number": 1
+	"salesperson": {
+		"href": "/api/salespeople/1/",
+		"first_name": "Sales001",
+		"last_name": "LastSales001",
+		"employee_id": "Sale001",
+		"id": 1
+	}
 }
 ```
 List all salespeople Return Value:
 ```
 {
-	"salespeople": [
+	"customers": [
 		{
-			"id": 1,
-			"name": "Jane Doe",
-			"employee_number": 1
+			"first_name": "Test002",
+			"last_name": "Last002",
+			"address": "222 Jose Drive Dallas, TX 75001",
+			"phone_number": "222-222-2222",
+			"id": 2
+		},
+		{
+			"first_name": "Test003",
+			"last_name": "Last003",
+			"address": "333 Jose Drive Dallas, TX 75001",
+			"phone_number": "333-333-3333",
+			"id": 3
 		}
 	]
 }
@@ -362,84 +391,71 @@ List all salespeople Return Value:
 
 | Action | Method | URL
 | ----------- | ----------- | ----------- |
-| List all salesrecords | GET | http://localhost:8090/api/salesrecords/
-| Create a new sale | POST | http://localhost:8090/api/salesrecords/
-| Show salesperson's salesrecords | GET | http://localhost:8090/api/salesrecords/id/
+| List all salesrecords | GET | http://localhost:8090/api/sales/
+| Create a new sale | POST | http://localhost:8090/api/sales/
+| Show salesperson's salesrecords | GET | http://localhost:8090/api/sales/id/
 List all Salesrecords Return Value:
 ```
 {
 	"sales": [
 		{
-			"id": 1,
-			"price": 111000,
-			"vin": {
-				"vin": "111"
+			"price": "100.00",
+			"automobile": {
+				"import_href": "/api/automobiles/NewTestVIN%20001/",
+				"vin": "NewTestVIN 001",
+				"sold": false,
+				"id": 6
 			},
 			"salesperson": {
-				"id": 1,
-				"name": "Liz",
-				"employee_number": 1
+				"href": "/api/salespeople/1/",
+				"first_name": "Sales001a",
+				"last_name": "LastSales001",
+				"employee_id": "Sale001",
+				"id": 1
 			},
-			"customer": {
-				"name": "Martha Stewart",
-				"address": "1313 Baker Street",
-				"phone_number": "980720890"
-			}
-		}
-	]
+        }
+    ]
 }
 ```
 Create a New Sale (SEND THIS JSON BODY):
 ```
 {
-	"salesperson": "Liz",
-	"customer": "John Johns",
-	"vin": "888",
-	"price": 40000
+	"customer": 2,
+	"automobile": 3,
+	"salesperson": 2,
+	"price": 210000.00
 }
 ```
-Return Value of Creating a New Sale:
+Detail of a Single New Sale:
 ```
 {
-	"id": 4,
-	"price": 40000,
-	"vin": {
-		"vin": "888"
-	},
-	"salesperson": {
-		"id": 1,
-		"name": "Liz",
-		"employee_number": 1
-	},
-	"customer": {
-		"id",
-		"name": "John Johns",
-		"address": "1212 Ocean Street",
-		"phone_number": "9804357878"
+	"sale": {
+		"price": "100.00",
+		"automobile": {
+			"import_href": "/api/automobiles/NewTestVIN%20001/",
+			"vin": "NewTestVIN 001",
+			"sold": false,
+			"id": 6
+		},
+		"salesperson": {
+			"href": "/api/salespeople/1/",
+			"first_name": "Sales001a",
+			"last_name": "LastSales001",
+			"employee_id": "Sale001",
+			"id": 1
+		},
+		"customer": {
+			"first_name": "Test002",
+			"last_name": "Last002",
+			"address": "222 Jose Drive Dallas, TX 75001",
+			"phone_number": "222-222-2222",
+			"id": 2
+		},
+		"id": 1
 	}
 }
 ```
-Show a Salesperson's Salesrecord Return Value:
-```
-{
-	"id": 1,
-	"price": 111000,
-	"vin": {
-		"vin": "111"
-	},
-	"salesperson": {
-		"id": 1,
-		"name": "Liz",
-		"employee_number": 1
-	},
-	"customer": {
-		"id",
-		"name": "Martha Stewart",
-		"address": "1313 Baker Street",
-		"phone_number": "980720890"
-	}
-}
-```
+
 # Service microservice
 
 Hello and welcome to the wonderful world of service!!
@@ -478,6 +494,8 @@ Example:
 			"last_name": "DarrylDarryl",
 			"employee_id": "E001"
 		},
+    ]
+}
 ```
 
 TECHNICIAN DETAIL: This is a GET request as well, so no data needs to be provided here either. When you list technicians, you will
@@ -525,6 +543,8 @@ Here is what you should see if you select "LIST TECHNICIAN" after you "CREATE TE
 			"last_name": "Vanderkellen",
 			"employee_id": "E002"
 		},
+    ]
+}
 ```
 
 DELETE TECHNICIAN - If we decide to "go another direction" as my first boss told me, then we need to remove the technician from the system. To do this, you just need to change the request type to "DELETE" instead of "POST". You also need to pull the "id" value just like you did in "TECHNICIAN DETAIL" to make sure you delete the correct one. Once they are "promoted to customer" they will no longer be in our page that lists
@@ -575,6 +595,8 @@ Also, the "date" and "time" fields HAVE TO BE IN THIS FORMAT
 			"vin": "1222",
 			"technician": "E001"
 		},
+    ]
+}
 ```
 SERVICE APPOINTMENT DETAIL: This will return the detail of each specific service appointment.
 ```
@@ -592,14 +614,14 @@ SERVICE APPOINTMENT DETAIL: This will return the detail of each specific service
 CREATE SERVICE APPOINTMENT - This will create a service appointment with the data input. It must follow the format. Remember, the "id" is automatically generated, so don't fill that in. To verify
 that it was added, just look at your service appointment list after creating a service appointment and it should be there.
 ```
-	{
-		"date_time": "2024-04-07T15:31:59+00:00",
-		"reason": "mah tires",
-		"status": "created",
-		"customer": "Barry",
-		"vin": "1222",
-		"technician": "E001"
-	}
+{
+    "date_time": "2024-04-07T15:31:59+00:00",
+    "reason": "mah tires",
+    "status": "created",
+    "customer": "Barry",
+    "vin": "1222",
+    "technician": "E001"
+}
 
 ```
 DELETE SERVICE APPOINTMENT - Just input the "id" of the service appointment that you want to delete at the end of the url. For example, if we wanted to delete the above service history appointment for Barry
@@ -701,6 +723,8 @@ To populate dropdowns with data fetched from external sources, the component uti
 The handleSubmit function handles form submission events, preventing the default form behavior and preparing the form data for submission to the server. It constructs a POST request with the form data and sends it to the appropriate API endpoint. In case of success, it resets the form data and sets the isSubmitted state to true. Conversely, any errors encountered during the submission process are logged to the console.
 Changes to form input fields are managed by the handleInputChange function, which updates the formData state based on user input. This ensures that the form data remains synchronized with user interactions.
 
+The updateAutomobileSoldStatus feature will send a PUT request to Inventory API at http://localhost:8100/api/automobiles/${vin}/ using the specific automobile VIN.  The PUT request will change the entry's "sold" status from "false" (default) to "true" (meaning the automobile was sold).  This will be important later on for the Appointment History form to display VIP status.
+
 Finally, the component returns JSX code representing the structure of the sales form. This includes input fields for selecting automobile VIN, salesperson, and customer, as well as an input field for specifying the sale price. Additionally, it renders a success message upon successful submission of the form. The SalesForm component is exported as the default export, making it available for use in other parts of the application.
 
 ### Sales List
@@ -750,6 +774,10 @@ The conditional rendering of the form will create a success message when the sta
 #### Appointment List
 The Appointment List displays all appointment database entries marked with a status of "created".  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response and filtered for only "created" status entries.  The result is re-rendered to be displayed in the page's table.
 
+Note the VIP column:  This is using the fetchVipVins function, which fetches the current automobile list through the Inventory API by sending a GET request to http://localhost:8100/api/automobiles/ .  A new array is created containing only the VINs of each automobile, which is then passed to create a new "set" object, stripping away duplicate VINs.  Now we have the state vipVins which holds the filtered information.
+
+In the JSX, the mapping generates a row for each iteration of the filtered (created status) appointment list.  It checks the vipVins list if it "has" the current row's vin.  If it does, "Yes ⭐" is displayed.  If not, a simple "No".  We hope the emoji is useful for catching the staff's eyes.
+
 Note the Date and Ttime columns:  Admittedly a bit tricky to set up, the date-time field is split into two columns for viewer ease.  The initial date-time value is formed by creating a date object, then manipulating the object to display the specific information.  The formattedDate has is currently configured to ignore a 0 infront of the month and day number display.
 
 Note the Cancel and Finish buttons:  We have an updateAppointmentStatus function to send a PUT request to a specific appointment through http://localhost:8080/api/appointments/${appointmentId}/ .  The PUT is designed to send the update request containing only the specific appointment's status of "cancelled" or "finished" depending on which button is selected.  As the buttons are clicked and the status receipt is confirmed, the list is updated.  As these appointments are no longer under the status of "created", they will not be included in this filtered list page.
@@ -759,9 +787,7 @@ The useEffect hook receives an empty array at the initial page load.  Upon getDa
 #### Appointment History
 The Appointment History initially displays all appointment database entries.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response.  The result is re-rendered to be displayed in the page's table.
 
-Note the VIP column:  This is using the fetchVipVins function, which fetches the current automobile list through the Inventory API by sending a GET request to http://localhost:8100/api/automobiles/ .  A new array is created containing only the VINs of each automobile, which is then passed to create a new "set" object, stripping away duplicate VINs.  Now we have the state vipVins which holds the filtered information.
-
-In the JSX, the mapping generates a row for each iteration of the filtered (created status) appointment list.  It checks the vipVins list if it "has" the current row's vin.  If it does, "Yes ⭐" is displayed.  If not, a simple "No".  We hope the emoji is useful for catching the staff's eyes.
+Note the VIP column:  Same functionality as the Appointment list.
 
 Note the Date and Time columns:  They function the same as the Appointment List mentioned above.
 
