@@ -5,45 +5,23 @@ function AppointmentsList() {
   const [appointments, setAppointments] = useState([]);
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [filterVinValue, setFilterVinValue] = useState("");
   const [vipVins, setVipVins] = useState(new Set());
 
-  const getData = async ()=> {
+  const getData = async () => {
     const response = await fetch('http://localhost:8080/api/appointments/?status=created');
     if (response.ok) {
       const { appointments } = await response.json();
       setAppointments(appointments.filter(appointment => appointment.status === 'created'));
     } else {
-      console.error('An error occurred fetching the data')
+      console.error('An error occurred fetching the data');
     }
-  }
-
-  useEffect(()=> {
-    getData()
-  }, []);
-
-const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
-  const url = `http://localhost:8080/api/appointments/${appointmentId}/`;
-  const data = { status: newStatus, vin: vin };
-  const fetchOptions = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
   };
 
-  try {
-    const response = await fetch(url, fetchOptions);
-    if (response.ok) {
-      getData();
-      setConfirmationMessage(`Congratulations! The appointment is ${newStatus}.`);
-      setShowConfirmation(true);
-      setTimeout(() => setShowConfirmation(false), 10000);
-    } else {
-      console.error('Failed to update appointment status', response.statusText);
-    }
-  } catch (error) {
-    console.error('Error updating appointment status', error);
-  }
-};
+  useEffect(() => {
+    getData();
+    fetchVipVins();
+  }, []);
 
   const fetchVipVins = async () => {
     const response = await fetch('http://localhost:8100/api/automobiles/');
@@ -56,9 +34,37 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
     }
   };
 
-  useEffect(() => {
-    fetchVipVins();
-  }, []);
+  const updateAppointmentStatus = async (appointmentId, newStatus) => {
+    const url = `http://localhost:8080/api/appointments/${appointmentId}/`;
+    const data = { status: newStatus };
+    const fetchOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    };
+
+    try {
+      const response = await fetch(url, fetchOptions);
+      if (response.ok) {
+        getData();
+        setConfirmationMessage(`Congratulations! The appointment is ${newStatus}.`);
+        setShowConfirmation(true);
+        setTimeout(() => setShowConfirmation(false), 10000);
+      } else {
+        console.error('Failed to update appointment status', await response.text());
+      }
+    } catch (error) {
+      console.error('Error updating appointment status', error);
+    }
+  };
+
+  const handleFilterVinChange = (e) => {
+    setFilterVinValue(e.target.value);
+  };
+
+  const filteredAppointments = appointments.filter((appointment) =>
+    appointment.vin.toLowerCase().includes(filterVinValue.toLowerCase())
+  );
 
   return (
     <div className="my-5 container">
@@ -69,10 +75,18 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
       )}
       <div className="row">
         <h1>Current Appointments</h1>
+        <input
+          type="text"
+          onChange={handleFilterVinChange}
+          value={filterVinValue}
+          placeholder="Search by VIN"
+          className="form-control mb-3"
+        />
         <table className="table table-striped m-3">
           <thead>
             <tr>
               <th>VIN</th>
+              <th>Is VIP?</th>
               <th>Customer</th>
               <th>Date</th>
               <th>Time</th>
@@ -82,7 +96,7 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
             </tr>
           </thead>
           <tbody>
-          {appointments.map(appointment => {
+          {filteredAppointments.map(appointment => {
               const isVip = vipVins.has(appointment.vin) ? "Yes ⭐" : "No";
               const date = new Date(appointment.date_time);
               const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
@@ -94,12 +108,13 @@ const updateAppointmentStatus = async (appointmentId, newStatus, vin) => {
               });
               return (
                 <tr key={appointment.id}>
-                  <td>{ appointment.vin }</td>
-                  <td>{ appointment.customer }</td>
-                  <td>{ formattedDate }</td>
-                  <td>{ formattedTime }</td>
-                  <td>{ appointment.technician}</td>
-                  <td>{ appointment.reason }</td>
+                  <td>{appointment.vin}</td>
+                  <td>{isVip}</td>
+                  <td>{appointment.customer}</td>
+                  <td>{formattedDate}</td>
+                  <td>{formattedTime}</td>
+                  <td>{appointment.technician}</td>
+                  <td>{appointment.reason}</td>
                   <td>
                     <button onClick={() => updateAppointmentStatus(appointment.id, 'cancelled')}>Cancel</button>
                     <button onClick={() => updateAppointmentStatus(appointment.id, 'finished')}>Finish</button>
