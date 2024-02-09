@@ -772,7 +772,7 @@ When the user has finished and submits the form, the asynchronous fetch call is 
 The conditional rendering of the form will create a success message when the state change of "hasCreated" becomes true.  The page will re-render, alerting the user and displaying the customizable success-message text.
 
 #### Appointment List
-The Appointment List displays all appointment database entries marked with a status of "created".  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response and filtered for only "created" status entries.  The result is re-rendered to be displayed in the page's table.
+The Appointment List displays all appointment database entries marked with a status of "created".  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response and filtered for only "created" status entries.  The result is re-rendered to be displayed in the page's table, which is sorted by date-time.
 
 Note the VIP column:  This is using the fetchVipVins function, which fetches the current automobile list through the Inventory API by sending a GET request to http://localhost:8100/api/automobiles/ .  A new array is created containing only the VINs of each automobile, which is then passed to create a new "set" object, stripping away duplicate VINs.  Now we have the state vipVins which holds the filtered information.
 
@@ -785,7 +785,7 @@ Note the Cancel and Finish buttons:  We have an updateAppointmentStatus function
 The useEffect hook receives an empty array at the initial page load.  Upon getData's successful fetch, useEffect updates the appointments state with the retrieved data, causing the component to rerender with the list of filtered appointments.
 
 #### Appointment History
-The Appointment History initially displays all appointment database entries.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response.  The result is re-rendered to be displayed in the page's table.
+The Appointment History initially displays all appointment database entries.  The getData function engages an asynchronous fetch of this data by sending a GET request to http://localhost:8080/api/appointments/ . If the Service API returns a successful response of response.ok being true, the data is extracted from the response.  The result is re-rendered to be displayed in the page's table, which is sorted by date-time.
 
 Note the VIP column:  Same functionality as the Appointment list.
 
