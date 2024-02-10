@@ -182,86 +182,89 @@ Create an automobile (SEND THIS JSON BODY):
 - You cannot make two automobiles with the same vin
 ```
 {
-    "color": "red",
-    "year": 2012,
-    "vin": "1C3CC5FB2AN120174",
-    "model_id": 1
+    "color": "blue",
+    "year": 2014,
+    "vin": "VIN004",
+    "model_id": 4
 }
 ```
-Detail of a Single Automobile:
+Return Value of Creating an Automobile:
 ```
 {
-	"href": "/api/automobiles/1C3CC5FB2AN120174/",
-	"id": 1,
-	"color": "red",
-	"year": 2012,
-	"vin": "777",
+	"href": "/api/automobiles/VIN004/",
+	"id": 4,
+	"color": "blue",
+	"year": 2014,
+	"vin": "VIN004",
 	"model": {
-		"href": "/api/models/1/",
-		"id": 1,
-		"name": "R8",
-		"picture_url": "image.yourpictureurl.com",
+		"href": "/api/models/4/",
+		"id": 4,
+		"name": "Model 04",
+		"picture_url": "",
 		"manufacturer": {
 			"href": "/api/manufacturers/1/",
 			"id": 1,
-			"name": "Audi"
+			"name": "Manufacturer 01a"
 		}
-	}
+	},
+	"sold": false
 }
 ```
 To get the details of a specific automobile, you can query by its VIN:
-example url: http://localhost:8100/api/automobiles/1C3CC5FB2AN120174/
+example url: http://localhost:8100/api/automobiles/VIN001/
 
 Return Value:
 ```
 {
-    "href": "/api/automobiles/1C3CC5FB2AN120174/",
-    "id": 1,
-    "color": "green",
-    "year": 2011,
-    "vin": "1C3CC5FB2AN120174",
-    "model": {
-            "href": "/api/models/1/",
-            "id": 1,
-            "name": "Sebring",
-            "picture_url": "image.yourpictureurl.com",
-            "manufacturer": {
-                "href": "/api/manufacturers/1/",
-                "id": 1,
-                "name": "Daimler-Chrysler"
-            }
-    }
+	"href": "/api/automobiles/VIN001/",
+	"id": 1,
+	"color": "red",
+	"year": 2012,
+	"vin": "VIN001",
+	"model": {
+		"href": "/api/models/1/",
+		"id": 1,
+		"name": "Model01a",
+		"picture_url": "image.google.com",
+		"manufacturer": {
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Manufacturer 01a"
+		}
+	},
+	"sold": false
 }
 ```
 You can update the color and/or year of an automobile (SEND THIS JSON BODY):
 ```
 {
-    "color": "red",
+    "color": "blue",
     "year": 2012
 }
 ```
 Getting a list of Automobile Return Value:
 ```
 {
-    "autos": [
-        {
-            "href": "/api/automobiles/1C3CC5FB2AN120174/",
-            "id": 1,
-            "color": "yellow",
-            "year": 2013,
-            "vin": "1C3CC5FB2AN120174",
-            "model": {
-                "href": "/api/models/1/",
-                "id": 1,
-                "name": "Sebring",
-                "picture_url": "image.yourpictureurl.com",
-                "manufacturer": {
-                    "href": "/api/manufacturers/1/",
-                    "id": 1,
-                    "name": "Daimler-Chrysler"
-                }
-            }
-        }
+	"autos": [
+		{
+			"href": "/api/automobiles/VIN001/",
+			"id": 1,
+			"color": "blue",
+			"year": 2012,
+			"vin": "VIN001",
+			"model": {
+				"href": "/api/models/1/",
+				"id": 1,
+				"name": "Model01a",
+				"picture_url": "image.google.com",
+				"manufacturer": {
+					"href": "/api/manufacturers/1/",
+					"id": 1,
+					"name": "Manufacturer 01a"
+				}
+			},
+			"sold": true
+		},
     ]
 }
 ```
@@ -294,25 +297,14 @@ To create a Customer (SEND THIS JSON BODY):
 	"phone_number": "444-444-4444"
 }
 ```
-Detail of a Single Customer:
+Return Value of Creating a Customer:
 ```
 {
-	"appointments": {
-		"href": "/api/appointments/1/",
-		"id": 1,
-		"date_time": "2024-02-06T15:31:59+00:00",
-		"reason": "Oil Change",
-		"status": "cancelled",
-		"customer": "Test 01",
-		"vin": "VIN001",
-		"technician": {
-			"href": "/api/technicians/1/",
-			"id": 1,
-			"first_name": "Larry01a",
-			"last_name": "LDD",
-			"employee_id": "E001"
-		}
-	}
+	"first_name": "Test004",
+	"last_name": "Last004",
+	"address": "444 Jose Drive Dallas, TX 75001",
+	"phone_number": "444-444-4444",
+	"id": 4
 }
 ```
 Return value of Listing all Customers:
@@ -353,36 +345,26 @@ To create a salesperson (SEND THIS JSON BODY):
 	"employee_id": "Sale004"
 }
 ```
-Detail of a single salesperson:
+Return Value of creating a salesperson:
 ```
 {
-	"salesperson": {
-		"href": "/api/salespeople/1/",
-		"first_name": "Sales001",
-		"last_name": "LastSales001",
-		"employee_id": "Sale001",
-		"id": 1
-	}
+	"href": "/api/salespeople/4/",
+	"first_name": "Sales004",
+	"last_name": "LastSales004",
+	"employee_id": "Sale004",
+	"id": 4
 }
 ```
 List all salespeople Return Value:
 ```
 {
-	"customers": [
+	"salespeople": [
 		{
-			"first_name": "Test002",
-			"last_name": "Last002",
-			"address": "222 Jose Drive Dallas, TX 75001",
-			"phone_number": "222-222-2222",
-			"id": 2
+            "first_name": "Sales004",
+            "last_name": "LastSales004",
+            "employee_id": "Sale004",
+			"id": 4
 		},
-		{
-			"first_name": "Test003",
-			"last_name": "Last003",
-			"address": "333 Jose Drive Dallas, TX 75001",
-			"phone_number": "333-333-3333",
-			"id": 3
-		}
 	]
 }
 ```
@@ -414,7 +396,15 @@ List all Salesrecords Return Value:
 				"employee_id": "Sale001",
 				"id": 1
 			},
-        }
+			"customer": {
+				"first_name": "Test002",
+				"last_name": "Last002",
+				"address": "222 Jose Drive Dallas, TX 75001",
+				"phone_number": "222-222-2222",
+				"id": 2
+			},
+			"id": 1
+		},
     ]
 }
 ```
@@ -427,7 +417,7 @@ Create a New Sale (SEND THIS JSON BODY):
 	"price": 210000.00
 }
 ```
-Detail of a Single New Sale:
+Return Value of Creating a New Sale:
 ```
 {
 	"sale": {
@@ -464,6 +454,8 @@ As explained above, the service microservice is an extension of the dealership t
 
 As automobiles are purchased, we keep track of the vin number of each automobile and you are able to receive the special perks of being a VIP!
 As a VIP, you will receive free oil changes for life, complimentary neck massages while in our waiting room, and free car washes whenever you would like!
+
+The AutomobileVO is a value object receives Inventory API automobile infromation from the included sales poller. The poller attempts to pull every 60 seconds and can be configured.  Note that a AutomobileVO List API exists and can be GET requested for the entries.  If you do not wish to implement future featurse that utilize this, please feel free to remove.
 
 This area is going to be broken down into the various API endpoints (Fancy way of saying your web address url) for service along with the format needed to send data to each component.
 The basics of service are as follows:
