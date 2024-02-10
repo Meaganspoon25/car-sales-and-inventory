@@ -784,3 +784,5 @@ Note the VIP column:  Same functionality as the Appointment list.
 Note the Date and Time columns:  They function the same as the Appointment List mentioned above.
 
 Note the Search by VIN feature: the handleFilterVinChange function uses an event that triggers the function call.  When the user inputs text ("onChange"), the setFilterVinValue is called which updates after each new field change is done by the user.  This goes to filteredAppointments which filters the appointment list based off the inputted VIN entry.  We have specifically set this to not be case-sensitive, so a user doesn't have to worry about the capitlization of letters.  With each paste or keystroke, the user's list will refresh with matching entries of that VIN.
+
+test
